@@ -1,0 +1,69 @@
+{
+  "subCategory": [
+    {
+      "id": "1",
+      "category": "fashion",
+      "category_id": 55,
+      "name": "harsh",
+      "description": "helloo"
+    },
+    {
+      "id": "596",
+      "category": 902,
+      "name": "njfkkkk",
+      "description": "kjnd"
+    },
+    {
+      "id": "354",
+      "category": 370,
+      "name": "sssaqaq",
+      "description": "aqaqaq"
+    }
+  ],
+  "MyAuto": [
+    {
+      "id": "fda7",
+      "name": "harsh",
+      "age": 18,
+      "address": "kamrej okoko",
+      "bod": "2025-01-09",
+      "file": "best-product-6.jpg",
+      "select": "INDIA",
+      "Gender": "Male",
+      "select_hobby": [
+        "Football",
+        "Kabadi"
+      ]
+    },
+    {
+      "id": "8e04",
+      "name": "vatshal",
+      "age": 22,
+      "address": "sarthana",
+      "bod": "2025-01-10",
+      "select": "DUBAI",
+      "Gender": "Male",
+      "select_hobby": [
+        "Football",
+        "Kabadi",
+        "Chess"
+      ],
+      "file": "best-product-2.jpg"
+    },
+    {
+      "id": "d726",
+      "name": "animal",
+      "age": 33,
+      "address": "hshh",
+      "bod": "2025-01-18",
+      "file": "best-product-4.jpg",
+      "select": "INDIA",
+      "Gender": "Male",
+      "select_hobby": [
+        "Cricket",
+        "Football",
+        "Kabadi"
+      ]
+    }
+  ]
+}
