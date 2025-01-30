@@ -6,19 +6,21 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { object, string } from 'yup';
+import { mixed, object, string } from 'yup';
 import { useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch, useSelector } from 'react-redux';
+import { CategoryDataget } from '../../../redux/Slice/categorySlice';
 
 export default function Category() {
 
   const [open, setOpen] = React.useState(false);
   const [setcat, setcatdata] = useState([])
-  const [update , setUpdate] = useState(false)
+  const [update, setUpdate] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,6 +31,11 @@ export default function Category() {
     setUpdate(false)
     resetForm()
   };
+
+  const dispatch = useDispatch()
+
+  const CatgorySelector = useSelector((state => state.Category))
+
 
   const handleDelete = (id) => {
     console.log(id);
@@ -77,7 +84,16 @@ export default function Category() {
   const columns = [
     // { field: 'id', headerName: 'Id', width: 70 },
     { field: 'name', headerName: 'Name', width: 70 },
-    { field: 'description', headerName: 'Description', width: 130 },
+    { field: 'description', headerName: 'Description', width: 130 }, {
+      field: 'cat_img', headerName: 'Image', width: 150,
+      renderCell: (params) => <Box component="img"
+        sx={{
+          height: 46,
+          width: 56,
+        }}
+        src={"img/" + params.value}
+      />,
+    },
     {
       headerName: 'Action', width: 130,
       renderCell: (params) => {
@@ -98,8 +114,36 @@ export default function Category() {
   const paginationModel = { page: 0, pageSize: 5 };
 
   let CategorySchema = object({
-    name: string().required(),
-    description: string().required()
+    name: string()
+      .matches(/^[a-zA-Z ]*$/, "Only characters allowed.")
+      .max(30)
+      .min(2)
+      .required(),
+    description: string().required(),
+    cat_img: mixed()
+      .required("You need to provide a file")
+      .test("cat_img", "The file is too large", (value) => {
+
+        if (typeof value === 'string') {
+          return true
+        } else if (typeof value === 'object') {
+          return value && value.size <= 2000000;
+        }
+
+      })
+      .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
+
+        if (typeof value === 'string') {
+          return true
+        } else if (typeof value === 'object') {
+          return value && (
+            value.type === "image/jpeg" ||
+            value.type === "image/png"
+          )
+        }
+
+
+      }),
   });
 
   const localDataDis = () => {
@@ -115,18 +159,20 @@ export default function Category() {
 
   const localDataset = (values) => {
 
-    let localData = JSON.parse(localStorage.getItem("category"))
+    // let localData = JSON.parse(localStorage.getItem("category"))
 
-    if (localData) {
+    // if (localData) {
 
-      localData.push({ ...values, id: Math.floor(Math.random() * 1000) })
-      localStorage.setItem("category", JSON.stringify(localData))
-      setcatdata(localData)
+    //   localData.push({ ...values, id: Math.floor(Math.random() * 1000) })
+    //   localStorage.setItem("category", JSON.stringify(localData))
+    //   setcatdata(localData)
 
-    } else {
-      localStorage.setItem("category", JSON.stringify([{ ...values, id: Math.floor(Math.random() * 1000) }]))
-      setcatdata([{ ...values, id: Math.floor(Math.random() * 1000) }])
-    }
+    // } else {
+    //   localStorage.setItem("category", JSON.stringify([{ ...values, id: Math.floor(Math.random() * 1000) }]))
+    //   setcatdata([{ ...values, id: Math.floor(Math.random() * 1000) }])
+    // }
+
+    dispatch(CategoryDataget(values))
 
   }
 
@@ -143,23 +189,24 @@ export default function Category() {
 
     localData[index] = data;
 
-    localStorage.setItem("category",JSON.stringify(localData))
-    
+    localStorage.setItem("category", JSON.stringify(localData))
+
     setcatdata(localData)
-    
+
   }
 
   const formik = useFormik({
     initialValues: {
       name: '',
-      description: ''
+      description: '',
+      cat_img: ''
     },
     validationSchema: CategorySchema,
     onSubmit: (values, { resetForm }) => {
 
-      if(update){
+      if (update) {
         updateData(values)
-      }else{
+      } else {
         localDataset(values)
       }
 
@@ -168,7 +215,7 @@ export default function Category() {
     },
   });
 
-  const { handleChange, handleSubmit, handleBlur, errors, values, touched , resetForm , setValues} = formik
+  const { handleChange, handleSubmit, handleBlur, errors, values, touched, resetForm, setValues ,setFieldValue } = formik
 
   return (
 
@@ -181,7 +228,7 @@ export default function Category() {
         onClose={handleClose}
       >
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} enctype="multipart/form-data">
           <DialogTitle>Category</DialogTitle>
           <DialogContent>
 
@@ -214,18 +261,31 @@ export default function Category() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+
+            <input
+              type='file'
+              name="cat_img"
+              onChange={(e) => { setFieldValue("cat_img", e.target.files[0]) }}
+              onBlur={handleBlur}
+            />
+
+            <img src={typeof values?.cat_img === 'string' ? 'img/' + values?.cat_img : 'img/' + values?.cat_img.name} width={'100px'} height={'100px'} />
+
+            {errors.cat_img && touched.cat_img ? <span style={{ color: "red" }}> {errors.cat_img} </span> : ''}
+
           </DialogContent>
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">{update ? 'Update '  :'Submit'}</Button>
+            <Button type="submit">{update ? 'Update ' : 'Submit'}</Button>
 
           </DialogActions>
         </form>
       </Dialog>
       <Paper sx={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={setcat}
+          rows={CatgorySelector?.Category}
+          getRowId={(row) => row._id} 
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
