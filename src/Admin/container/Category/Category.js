@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoryDataget } from '../../../redux/Slice/categorySlice';
+import { CategoryDataget, deleteCategory, getallCatData } from '../../../redux/Slice/categorySlice';
 
 export default function Category() {
 
@@ -40,9 +40,11 @@ export default function Category() {
   const handleDelete = (id) => {
     console.log(id);
 
-    let localData = JSON.parse(localStorage.getItem("category"));
+    // let localData = JSON.parse(localStorage.getItem("category"));
 
-    console.log(localData);
+    // console.log(localData);
+
+    dispatch(deleteCategory(id))
 
     //-------------------------1----------------------------
 
@@ -62,15 +64,15 @@ export default function Category() {
 
     //filter method
 
-    let fdata = localData.filter((v) => v.id !== id)
+    // let fdata = localData.filter((v) => v.id !== id)
 
-    console.log(fdata);
+    // console.log(fdata);
 
-    localStorage.setItem("category", JSON.stringify(fdata))
+    // localStorage.setItem("category", JSON.stringify(fdata))
 
-    //-------------------------------------------------------
+    // //-------------------------------------------------------
 
-    setcatdata(localData)
+    // setcatdata(localData)
 
   };
 
@@ -91,7 +93,7 @@ export default function Category() {
           height: 46,
           width: 56,
         }}
-        src={"img/" + params.value}
+        src={'http://localhost:4000/'+ params.value}
       />,
     },
     {
@@ -99,7 +101,7 @@ export default function Category() {
       renderCell: (params) => {
         return (
           <>
-            <IconButton aria-label="delete" onClick={() => { handleDelete(params.row.id) }}>
+            <IconButton aria-label="delete" onClick={() => { handleDelete(params.row._id) }}>
               <DeleteIcon />
             </IconButton>
             <IconButton aria-label="edit" onClick={() => { handleEdit(params.row) }}>
@@ -148,9 +150,11 @@ export default function Category() {
 
   const localDataDis = () => {
 
-    let DisData = JSON.parse(localStorage.getItem("category"))
+    // let DisData = JSON.parse(localStorage.getItem("category"))
 
-    setcatdata(DisData)
+    // setcatdata(DisData)
+
+    dispatch(getallCatData())
   }
 
   useEffect(() => {
@@ -269,7 +273,7 @@ export default function Category() {
               onBlur={handleBlur}
             />
 
-            <img src={typeof values?.cat_img === 'string' ? 'img/' + values?.cat_img : 'img/' + values?.cat_img.name} width={'100px'} height={'100px'} />
+            <img src={typeof values?.cat_img === 'string' ? 'http://localhost:4000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
 
             {errors.cat_img && touched.cat_img ? <span style={{ color: "red" }}> {errors.cat_img} </span> : ''}
 
