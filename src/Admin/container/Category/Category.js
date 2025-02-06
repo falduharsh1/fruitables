@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoryDataget, deleteCategory, getallCatData } from '../../../redux/Slice/categorySlice';
+import { CategoryDataget, deleteCategory, editCategory, getallCatData } from '../../../redux/Slice/categorySlice';
 
 export default function Category() {
 
@@ -85,13 +85,14 @@ export default function Category() {
 
   const columns = [
     // { field: 'id', headerName: 'Id', width: 70 },
-    { field: 'name', headerName: 'Name', width: 70 },
-    { field: 'description', headerName: 'Description', width: 130 }, {
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'description', headerName: 'Description', width: 350 }, 
+    {
       field: 'cat_img', headerName: 'Image', width: 150,
       renderCell: (params) => <Box component="img"
         sx={{
-          height: 46,
-          width: 56,
+          height: 50,
+          width: 65,
         }}
         src={'http://localhost:4000/'+ params.value}
       />,
@@ -113,7 +114,7 @@ export default function Category() {
     }
   ];
 
-  const paginationModel = { page: 0, pageSize: 5 };
+  const paginationModel = { page: 0, pageSize: 12 };
 
   let CategorySchema = object({
     name: string()
@@ -181,21 +182,23 @@ export default function Category() {
   }
 
   const updateData = (data) => {
-    console.log(data);
 
-    let localData = JSON.parse(localStorage.getItem("category"))
+    dispatch(editCategory(data))
+    // console.log(data);
 
-    console.log(localData);
+    // let localData = JSON.parse(localStorage.getItem("category"))
 
-    let index = localData.findIndex((v) => v.id === data.id)
+    // console.log(localData);
 
-    console.log(index);
+    // let index = localData.findIndex((v) => v.id === data.id)
 
-    localData[index] = data;
+    // console.log(index);
 
-    localStorage.setItem("category", JSON.stringify(localData))
+    // localData[index] = data;
 
-    setcatdata(localData)
+    // localStorage.setItem("category", JSON.stringify(localData))
+
+    // setcatdata(localData)
 
   }
 

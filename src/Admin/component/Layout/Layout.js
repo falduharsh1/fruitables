@@ -19,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import CategoryIcon from "@mui/icons-material/Category";
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
 import { NavLink } from "react-router-dom";
 
@@ -116,11 +117,8 @@ export default function Layout({ children }) {
 
   const listArr = [
     { lable: "Category", icon: <CategoryIcon />, to: "/Admin/Category" },
-    {
-      lable: "SubCategory",
-      icon: <BreakfastDiningIcon />,
-      to: "/Admin/SubCategory",
-    },
+    {lable: "SubCategory",icon: <BreakfastDiningIcon />,to: "/Admin/SubCategory",},
+    {lable: "Product",icon: <ProductionQuantityLimitsIcon />,to: "/Admin/Product",},
     { lable: "Counter", icon: <CategoryIcon />, to: "/Admin/Counter" },
   ];
 

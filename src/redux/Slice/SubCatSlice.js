@@ -48,11 +48,11 @@ export const getsubcat = createAsyncThunk(
     'subCat/getsubcat',
     async () => {
         try {
-            const response = await axios("http://localhost:8000/subCategory");
+            const response = await axios.get("http://localhost:4000/api/v1/subcategory/list-subcategory");
 
             console.log(response);
 
-            return response.data
+            return response.data.data
 
         } catch (error) {
             console.log(error);
@@ -61,15 +61,38 @@ export const getsubcat = createAsyncThunk(
     }
 )
 
+// export const getOneDataSubCat = createAsyncThunk(
+//     'subCat/getOneDataSubCat',
+//     async (data) => {
+//         try {
+//             const response = await axios.post("http://localhost:4000/subCategory", data ,{
+//                 headers: {
+//                     'Content-Type': 'multipart/form-data'
+//                   }
+//             })
+
+//             return response.data.data
+            
+//         } catch (error) {
+//             console.log(error);
+            
+//         }
+//     }
+// )
+
 export const addSubCat = createAsyncThunk(
-    'subcat/addSubCat',
+    'subCat/addSubCat',
     async (data) => {
         try {
-            const response = await axios.post("http://localhost:8000/subCategory", data);
+            const response = await axios.post("http://localhost:4000/api/v1/subCategory/post-subcategory", data,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+            });
 
             console.log(response);
 
-            return response.data
+            return response.data.data
         } catch (error) {
             console.log(error);
         }
@@ -77,14 +100,14 @@ export const addSubCat = createAsyncThunk(
 )
 
 export const deleteSubCat = createAsyncThunk(
-    'subcat/deleteSubCat',
+    'subCat/deleteSubCat',
     async (id) => {
         try {
             console.log(id);
             
-            const response = await axios.delete("http://localhost:8000/subCategory/" + id)
+            const response = await axios.delete("http://localhost:4000/api/v1/subCategory/delete-subcategory/" + id)
 
-            return id;
+            return response.data.data._id
             
         } catch (error) {
             console.log(error);
@@ -94,12 +117,16 @@ export const deleteSubCat = createAsyncThunk(
 )
 
 export const editSubCat = createAsyncThunk(
-    'subcat/editSubCat',
+    'subCat/editSubCat',
     async (data) => {
         try {
-            const response = await axios.put("http://localhost:8000/subCategory/" + data.id, data)
+            const response = await axios.put("http://localhost:4000/api/v1/subCategory/put-subcategory/" + data._id, data,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+            })
 
-            return response.data
+            return response.data.data
         } catch (error) {
             console.log(error);
 
@@ -108,21 +135,22 @@ export const editSubCat = createAsyncThunk(
 )
 
 const SubCategorySlice = createSlice({
-    name: 'subcat',
+    name: 'subCat',
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getsubcat.fulfilled, (state, action) => {
             state.subCat = action.payload
         })
         builder.addCase(addSubCat.fulfilled, (state, action) => {
-            state.subCat = state.subCat.concat(action.payload)
+            console.log(action.payload)
+            state.subCat = state.subCat?.concat(action.payload)
         })
         builder.addCase(deleteSubCat.fulfilled, (state, action) => {
-            state.subCat = state.subCat.filter((v) => v.id !== action.payload)
+            state.subCat = state.subCat.filter((v) => v._id !== action.payload)
         })
         builder.addCase(editSubCat.fulfilled, (state, action) => {
             state.subCat = state.subCat?.map((v) => {
-                if (v.id === action.payload?.id) {
+                if (v._id === action.payload?._id) {
                     return action.payload
                 } else {
                     return v

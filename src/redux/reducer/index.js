@@ -1,13 +1,16 @@
 import { combineReducers } from "redux";
 import handleCounter from "./CounterReducer";
-import SubCategorySlice from "../Slice/SubCatSlice";
+import SubCatSlice from "../Slice/SubCatSlice";
 import MyAutoSlice from "../Slice/MyAutoSlice";
 import categorySlice from "../Slice/categorySlice";
+import ProductSlice from "../Slice/ProductSlice";
 
 
 export const rootReducer = combineReducers ({
     count : handleCounter,
-    subCat : SubCategorySlice,
     MyAuto : MyAutoSlice,
-    Category : categorySlice
+    Category : categorySlice,
+    subCat : SubCatSlice,
+    product : ProductSlice
+    // subcategory : ProductSlice
 })
