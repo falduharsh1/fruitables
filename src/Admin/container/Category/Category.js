@@ -105,6 +105,7 @@ export default function Category() {
             <IconButton aria-label="delete" onClick={() => { handleDelete(params.row._id) }}>
               <DeleteIcon />
             </IconButton>
+            
             <IconButton aria-label="edit" onClick={() => { handleEdit(params.row) }}>
               <EditIcon />
             </IconButton>

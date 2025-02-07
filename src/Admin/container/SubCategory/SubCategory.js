@@ -50,7 +50,7 @@ export default function SubCategory() {
       }
     },
     { field: 'name', headerName: 'SubCategory name', width: 180 },
-    { field: 'description', headerName: 'Description name', width: 520 },
+    { field: 'description', headerName: 'Description', width: 520 },
     {
       field: 'subCat_img', headerName: 'Image', width: 150,
       renderCell: (params) => <Box component="img"

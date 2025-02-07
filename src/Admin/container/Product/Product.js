@@ -89,7 +89,7 @@ export default function Product() {
             }
         },
         { field: 'name', headerName: 'Product name', width: 190 },
-        { field: 'description', headerName: 'Description name', width: 400 },
+        { field: 'description', headerName: 'Description ', width: 400 },
         { field: 'price', headerName: 'Price', width: 100 },
         {
             field: 'product_img', headerName: 'Image', width: 150,
