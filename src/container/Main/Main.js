@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 export default function Main() {
 
@@ -467,7 +468,7 @@ export default function Main() {
             {
               categoryData.Category?.map((v, i) => (
                 <div className="col-md-6 col-lg-4">
-                  <a href="#">
+                  <NavLink to={"/SubCategory/" + v._id}>
                   <div className="service-item bg-secondary rounded border border-secondary">
                   <img src={'http://localhost:4000/'+ v.cat_img} className="img-fluid rounded-top w-100"   alt />
                   <div className="px-4 rounded-bottom">
@@ -478,7 +479,7 @@ export default function Main() {
                     </div>
                   </div>
                 </div>
-                  </a>
+                  </NavLink>
                 </div>
 
               ))}

@@ -11,6 +11,8 @@ import Testimonial from "../container/Testimonial/Testimonial";
 import Main from "../container/Main/Main";
 import Footer from '../component/Footer/Footer';
 import MyAuto from '../container/MyAuto/MyAuto';
+import SubCategory from '../container/SubCategory/SubCategory';
+
 
 export default function UserRoute() {
   return (
@@ -19,6 +21,7 @@ export default function UserRoute() {
     <Routes>
       <Route path="/" element={<Main/>} />
       <Route path="/Shop" element={<Shop/>} />
+      <Route path="/Shop/:id" element={<Shop/>} />
       <Route path="/Shop/:id" element={<ShopDetail/>} />
       <Route path="/ShopDetail" element={<ShopDetail/>} />
       <Route path="/Testimonial" element={<Testimonial/>} />
@@ -26,9 +29,10 @@ export default function UserRoute() {
       <Route path="/Chackout" element={<Chackout/>} />
       <Route path="/Contact" element={<Contact/>} />
       <Route path="/Error404" element={<Error404/>} />
+      <Route path="/SubCategory/:id" element={<SubCategory/>} />
       <Route path="/MyAuto" element={<MyAuto/>} />
+      
     </Routes>
-   
     <Footer/>     
     </>
   )
