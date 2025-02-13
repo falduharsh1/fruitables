@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { getproduct } from '../../redux/Slice/ProductSlice';
-// import { decrement, increment } from '../../../redux/action/counter.action'
+import { getproduct } from '../../redux/Slice/productSlice';
+import { decrement, increment } from '../../../src/redux/action/counter.action'
+import { addToCart } from '../../redux/Slice/cartSlice';
 
 export default function ShopDetail(props) {
 
@@ -11,17 +12,25 @@ export default function ShopDetail(props) {
 
   const dispatch = useDispatch()
 
-  // const c = useSelector((state => state.count))
+  const c = useSelector((state) => state.count)
 
-  // const handleIncrement = () => {
-  //   dispatch(increment())
-  // }
+  const cartSelecter = useSelector(state => state.carts)
+  console.log("vsdcsdcds",cartSelecter);
 
-  // const handleDecrement = () => {
-  //   dispatch(decrement())
-  // }
+  const handleCart = (id) => {
+    console.log("iiiddd",id);
+    dispatch(addToCart(id))
+  }
 
-  const productselector = useSelector((state => state.product));
+  const handleIncrement = () => {
+    dispatch(increment())
+  }
+
+  const handleDecrement = () => {
+    dispatch(decrement())
+  }
+
+  const productselector = useSelector((state) => state.product);
   console.log(productselector);
 
   const productDatas = productselector.product.find((v) => v._id === id )
@@ -47,14 +56,14 @@ export default function ShopDetail(props) {
           <div className="col-lg-6">
             <div className="border rounded">
               <a href="#">
-                <img src={'http://localhost:4000/' + productDatas.product_img} className="img-fluid rounded" alt="Image" />
+                <img src={'http://localhost:4000/' + productDatas?.product_img} className="img-fluid rounded" alt="Image" />
               </a>
             </div>
           </div>
           <div className="col-lg-6">
-            <h4 className="fw-bold mb-3">{productDatas.name}</h4>
+            <h4 className="fw-bold mb-3">{productDatas?.name}</h4>
             <p className="mb-3">Category: Vegetables</p>
-            <h5 className="fw-bold mb-3">{productDatas.price +' ₹/kg'}</h5>
+            <h5 className="fw-bold mb-3">{productDatas?.price +' ₹/kg'}</h5>
             <div className="d-flex mb-4">
               <i className="fa fa-star text-secondary" />
               <i className="fa fa-star text-secondary" />
@@ -62,24 +71,29 @@ export default function ShopDetail(props) {
               <i className="fa fa-star text-secondary" />
               <i className="fa fa-star" />
             </div>
-            <p className="mb-4">{productDatas.description}</p>
+            <p className="mb-4">{productDatas?.description}</p>
             <div className="input-group quantity mb-5" style={{width: 100}}>
               <div className="input-group-btn">
-                <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                <button className="btn btn-sm btn-minus rounded-circle bg-light border"  onClick={handleDecrement}>
                   <i className="fa fa-minus" />
                 </button>
               </div>
 
-              {/* <p>{c.count}</p> */}
+              <p>{c.count}</p>
 
-              <input type="text" className="form-control form-control-sm text-center border-0" defaultValue={1} />
+              {/* <input type="text" className="form-control form-control-sm text-center border-0" defaultValue={1} /> */}
               <div className="input-group-btn" >
-                <button className="btn btn-sm btn-plus rounded-circle bg-light border">
+                <button className="btn btn-sm btn-plus rounded-circle bg-light border" onClick={handleIncrement}>
                   <i className="fa fa-plus" />
                 </button>
               </div>
             </div>
-            <a href="#" className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
+            <a href="#" className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
+              onClick={() => handleCart(productDatas._id)}
+            >
+              <i className="fa fa-shopping-bag me-2 text-primary" />
+               Add to cart
+               </a>
           </div>
 
 
@@ -226,7 +240,6 @@ export default function ShopDetail(props) {
             </div>
           </form>
         </div>
-
 
       </div>
       {/* <div className="col-lg-4 col-xl-3">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
-import { getproduct } from '../../redux/Slice/ProductSlice';
+import { getproduct } from '../../redux/Slice/productSlice';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';

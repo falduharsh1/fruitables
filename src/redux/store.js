@@ -14,8 +14,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const createStore = () => {  
   const store = configureStore({
-    reducer: persistedReducer,
-    MyAuto: MyAutoSlice,
+    reducer: persistedReducer
   })
 
   let persistor = persistStore(store)

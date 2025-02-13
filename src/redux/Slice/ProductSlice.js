@@ -97,7 +97,7 @@ export const getSubByCat = createAsyncThunk(
     }
 )
 
-const Productslice = createSlice({
+const productSlice = createSlice({
     name: 'product',
     initialState,
     extraReducers: (builder) => {
@@ -127,4 +127,4 @@ const Productslice = createSlice({
 })
 
 
-export default Productslice.reducer
+export default productSlice.reducer
