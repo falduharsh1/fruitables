@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    isLoading : false,
-    cart : [],
-    error : null
+    isLoading: false,
+    cart: [],
+    error: null
 }
 
 // export const addToCart = () => {
@@ -23,28 +23,44 @@ const initialState = {
 // }
 
 const cartSlice = createSlice({
-    name : 'carts',
+    name: 'carts',
     initialState,
-    reducers : {
-        addToCart : (state, action) => {
+    reducers: {
+
+        addToCart: (state, action) => {
+
             console.log(action);
 
-           let carts = state.cart?.find((v) => v.pid === action.payload)
-            console.log(carts);
-            
-            if(carts){
-                carts.Qut++
-            }else{
-                state.cart?.push({
-                    pid : action.payload,
-                    Qut : 1
-                })
+            let cartsdata = state.cart?.find((v) => v?.pid === action?.payload?.pid)
+            console.log(cartsdata);
+
+            if (cartsdata) {
+                cartsdata.Qut = cartsdata.Qut + action.payload.Qut
+            } else {
+                state.cart?.push(action.payload)
             }
-            
-        }
+
+        },
+
+        IncrementQut: (state, action) => {
+
+            console.log("increment", action);
+
+            let cartdata = state.cart?.find((v) => v?.pid === action?.payload?.pid)
+            console.log(cartdata);
+
+            if (cartdata) {
+                cartdata.Qut = cartdata.Qut++
+            }
+
+        },
+
+        // DecrementQut : (state, action) => {
+
+        // }
     }
 })
 
-export const {addToCart} = cartSlice.actions
+export const { addToCart, IncrementQut, DecrementQut } = cartSlice.actions
 
 export default cartSlice.reducer

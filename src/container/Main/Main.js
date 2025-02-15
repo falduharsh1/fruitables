@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getallCatData } from '../../redux/Slice/categorySlice';
 
 export default function Main() {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getallCatData())
+  }, [])
+
   const categoryData = useSelector(state => state.Category);
         console.log(categoryData);
 
@@ -470,7 +475,7 @@ export default function Main() {
                 <div className="col-md-6 col-lg-4">
                   <NavLink to={"/SubCategory/" + v._id}>
                   <div className="service-item bg-secondary rounded border border-secondary">
-                  <img src={'http://localhost:4000/'+ v.cat_img} className="img-fluid rounded-top w-100"   alt />
+                  <img src={'http://localhost:8000/'+ v.cat_img} className="img-fluid rounded-top w-100"   alt />
                   <div className="px-4 rounded-bottom">
                     <div className="service-content bg-primary text-center p-4 rounded">
                       <h2 key={v._id} value={v._id}>

@@ -98,7 +98,7 @@ export default function Product() {
                     height: 50,
                     width: 65,
                 }}
-                src={'http://localhost:4000/' + params.value}
+                src={'http://localhost:8000/' + params.value}
             />,
 
 
@@ -341,7 +341,7 @@ export default function Product() {
                                 onBlur={handleBlur}
                             />
 
-                            <img src={typeof values?.product_img === 'string' ? 'http://localhost:4000/' + values?.product_img : "../img/" + values?.product_img.name} width={'100px'} height={'100px'} />
+                            <img src={typeof values?.product_img === 'string' ? 'http://localhost:8000/' + values?.product_img : "../img/" + values?.product_img.name} width={'100px'} height={'100px'} />
 
                             {errors.product_img && touched.product_img ? <span style={{ color: "red" }}> {errors.product_img} </span> : ''}
 

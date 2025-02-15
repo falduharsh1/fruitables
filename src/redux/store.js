@@ -7,7 +7,7 @@ import MyAutoSlice from './Slice/MyAutoSlice'
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: ['count']
+  whitelist: []
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -58,7 +58,7 @@ export default function SubCategory() {
           height: 50,
           width: 65,
         }}
-        src={'http://localhost:4000/' + params.value}
+        src={'http://localhost:8000/' + params.value}
       />,
      
       
@@ -252,7 +252,7 @@ export default function SubCategory() {
                 onBlur={handleBlur}
               />
 
-              <img src={typeof values?.subCat_img === 'string' ? 'http://localhost:4000/' + values?.subCat_img : "../img/" + values?.subCat_img.name} width={'100px'} height={'100px'} />
+              <img src={typeof values?.subCat_img === 'string' ? 'http://localhost:8000/' + values?.subCat_img : "../img/" + values?.subCat_img.name} width={'100px'} height={'100px'} />
 
               {errors.subCat_img && touched.subCat_img ? <span style={{ color: "red" }}> {errors.subCat_img} </span> : ''}
 

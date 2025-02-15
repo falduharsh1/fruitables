@@ -2,32 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getproduct } from '../../redux/Slice/productSlice';
-import { decrement, increment } from '../../../src/redux/action/counter.action'
-import { addToCart } from '../../redux/Slice/cartSlice';
+// import { decrement, increment } from '../../../src/redux/action/counter.action'
+// import { addToCart } from '../../redux/Slice/CartSlice';
+import { addToCart, DecrementQut, IncrementQut } from '../../redux/Slice/cartSlice';
 
 export default function ShopDetail(props) {
 
   const {id} = useParams()
   console.log(id);
 
+  const [count , setcount] = useState(1)
+
   const dispatch = useDispatch()
 
-  const c = useSelector((state) => state.count)
+  // const c = useSelector((state) => state.count)
 
   const cartSelecter = useSelector(state => state.carts)
-  console.log("vsdcsdcds",cartSelecter);
+  console.log("Addcart",cartSelecter);
 
   const handleCart = (id) => {
     console.log("iiiddd",id);
-    dispatch(addToCart(id))
-  }
-
-  const handleIncrement = () => {
-    dispatch(increment())
-  }
-
-  const handleDecrement = () => {
-    dispatch(decrement())
+    dispatch(addToCart({pid : id , Qut : count}))
+    // dispatch(IncrementQut({pid : id , Qut : count}))
   }
 
   const productselector = useSelector((state) => state.product);
@@ -56,7 +52,7 @@ export default function ShopDetail(props) {
           <div className="col-lg-6">
             <div className="border rounded">
               <a href="#">
-                <img src={'http://localhost:4000/' + productDatas?.product_img} className="img-fluid rounded" alt="Image" />
+                <img src={'http://localhost:8000/' + productDatas?.product_img} className="img-fluid rounded" alt="Image" />
               </a>
             </div>
           </div>
@@ -74,16 +70,20 @@ export default function ShopDetail(props) {
             <p className="mb-4">{productDatas?.description}</p>
             <div className="input-group quantity mb-5" style={{width: 100}}>
               <div className="input-group-btn">
-                <button className="btn btn-sm btn-minus rounded-circle bg-light border"  onClick={handleDecrement}>
+                <button className="btn btn-sm btn-minus rounded-circle bg-light border" 
+                   disabled = {count <= 1}
+                onClick={() => setcount(count-1)}
+                >
                   <i className="fa fa-minus" />
                 </button>
               </div>
 
-              <p>{c.count}</p>
+              <p>{count}</p>
 
               {/* <input type="text" className="form-control form-control-sm text-center border-0" defaultValue={1} /> */}
               <div className="input-group-btn" >
-                <button className="btn btn-sm btn-plus rounded-circle bg-light border" onClick={handleIncrement}>
+                <button className="btn btn-sm btn-plus rounded-circle bg-light border" 
+                onClick={() => setcount(count + 1)}>
                   <i className="fa fa-plus" />
                 </button>
               </div>

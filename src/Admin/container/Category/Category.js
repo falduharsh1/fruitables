@@ -94,7 +94,7 @@ export default function Category() {
           height: 50,
           width: 65,
         }}
-        src={'http://localhost:4000/'+ params.value}
+        src={'http://localhost:8000/'+ params.value}
       />,
     },
     {
@@ -277,7 +277,7 @@ export default function Category() {
               onBlur={handleBlur}
             />
 
-            <img src={typeof values?.cat_img === 'string' ? 'http://localhost:4000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
+            <img src={typeof values?.cat_img === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
 
             {errors.cat_img && touched.cat_img ? <span style={{ color: "red" }}> {errors.cat_img} </span> : ''}
 

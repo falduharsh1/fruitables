@@ -35,7 +35,7 @@ export default function SubCategory() {
                                 <div className="col-md-6 col-lg-4">
                                     <NavLink to={"/Shop/" + v._id}>
                                     <div className="service-item bg-secondary rounded border border-secondary">
-                                        <img src={'http://localhost:4000/' + v.subCat_img} className="img-fluid rounded-top w-100" alt style={{ height: '350px', objectFit: 'cover'}}/>
+                                        <img src={'http://localhost:8000/' + v.subCat_img} className="img-fluid rounded-top w-100" alt style={{ height: '350px', objectFit: 'cover'}}/>
                                         <div className="px-4 rounded-bottom">
                                             <div className="service-content bg-primary text-center p-4 rounded">
                                                 <h2 key={v._id} value={v._id}>
@@ -62,7 +62,7 @@ export default function SubCategory() {
                             <div className="col-md-6 col-lg-4" key={v._id}>
                                 <div className="service-item bg-secondary rounded border border-secondary" style={{ height: '390px' }}>
                                     <img
-                                        src={`http://localhost:4000/${v.subCat_img}`}
+                                        src={`http://localhost:8000/${v.subCat_img}`}
                                         className="img-fluid rounded-top w-100"
                                         alt={v.name}
                                         style={{ height: '300px', objectFit: 'cover' }}

@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import { green } from '@mui/material/colors';
+import { getsubcat } from '../../redux/Slice/SubCatSlice';
+import { getallCatData } from '../../redux/Slice/categorySlice';
 
 
 export default function Shop() {
@@ -23,6 +25,8 @@ export default function Shop() {
   console.log(productselector);
 
   useEffect(() => {
+    dispatch(getallCatData())
+    dispatch(getsubcat())
     dispatch(getproduct())
   }, [])
 
@@ -317,7 +321,7 @@ export default function Shop() {
                             <div className="rounded position-relative fruite-item">
 
                               <div className="fruite-img">
-                                <img src={'http://localhost:4000/' + v.product_img} className="img-fluid w-100 rounded-top" alt style={{ height: '280px' }} />
+                                <img src={'http://localhost:8000/' + v.product_img} className="img-fluid w-100 rounded-top" alt style={{ height: '280px' }} />
                               </div>
 
                               <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }} >

@@ -11,7 +11,7 @@ export const getproduct = createAsyncThunk(
     'product/getproduct',
     async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/v1/product/list-product");
+            const response = await axios.get("http://localhost:8000/api/v1/product/list-product");
 
             console.log(response.data.data);
 
@@ -29,7 +29,7 @@ export const addproduct = createAsyncThunk(
         try {
             console.log("helllo");
             
-            const response = await axios.post("http://localhost:4000/api/v1/product/post-product", data,{
+            const response = await axios.post("http://localhost:8000/api/v1/product/post-product", data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -50,7 +50,7 @@ export const deleteproduct = createAsyncThunk(
         try {
             console.log(id);
             
-            const response = await axios.delete("http://localhost:4000/api/v1/product/delete-product/" + id)
+            const response = await axios.delete("http://localhost:8000/api/v1/product/delete-product/" + id)
 
             return response.data.data._id
             
@@ -65,7 +65,7 @@ export const editproduct = createAsyncThunk(
     'product/editproduct',
     async (data) => {
         try {
-            const response = await axios.put("http://localhost:4000/api/v1/product/put-product/" + data._id, data,{
+            const response = await axios.put("http://localhost:8000/api/v1/product/put-product/" + data._id, data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -85,7 +85,7 @@ export const getSubByCat = createAsyncThunk(
         try {
             console.log(category_id);
             
-            const response = await axios.get("http://localhost:4000/api/v1/product/getSubByCat/" + category_id)
+            const response = await axios.get("http://localhost:8000/api/v1/product/getSubByCat/" + category_id)
 
             console.log("SubCategoryget", response.data.data);
             
