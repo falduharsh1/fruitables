@@ -6,22 +6,6 @@ const initialState = {
     error: null
 }
 
-// export const addToCart = () => {
-
-// }
-
-// export const IncrementQut = () => {
-
-// }
-
-// export const DecrementQut = () => {
-
-// }
-
-// export const RemoveProduct = () => {
-
-// }
-
 const cartSlice = createSlice({
     name: 'carts',
     initialState,
@@ -50,17 +34,36 @@ const cartSlice = createSlice({
             console.log(cartdata);
 
             if (cartdata) {
-                cartdata.Qut = cartdata.Qut++
+                cartdata.Qut += 1;
             }
 
         },
 
-        // DecrementQut : (state, action) => {
+        DecrementQut: (state, action) => {
 
-        // }
+            let cartData = state?.cart?.find((v) => v?.pid === action?.payload?.pid)
+
+            if (cartData) {
+                cartData.Qut += -1
+            }
+        },
+
+        RemoveProduct : (state , action) => {
+            console.log(action.payload);
+            console.log(state.cart);
+            
+            let i = state?.cart?.findIndex((v) => v._pid !== action.payload.pid)
+
+            state.cart.splice(i, 1)
+
+            // console.log(cartData);
+            // return cartData
+            
+     
+        }
     }
 })
 
-export const { addToCart, IncrementQut, DecrementQut } = cartSlice.actions
+export const { addToCart, IncrementQut, DecrementQut, RemoveProduct} = cartSlice.actions
 
 export default cartSlice.reducer

@@ -226,11 +226,14 @@ export default function Category() {
   const { handleChange, handleSubmit, handleBlur, errors, values, touched, resetForm, setValues ,setFieldValue } = formik
 
   return (
-
+    <>
+      <div>Category</div>
+      <br></br>
     <React.Fragment>
       <Button style={{ marginLeft: '89%' }} variant="outlined" onClick={handleClickOpen} >
         Add Category
       </Button>
+      <br></br>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -302,5 +305,7 @@ export default function Category() {
         />
       </Paper>
     </React.Fragment>
+    </>
+
   )
 }

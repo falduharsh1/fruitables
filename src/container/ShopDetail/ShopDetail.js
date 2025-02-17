@@ -23,7 +23,6 @@ export default function ShopDetail(props) {
   const handleCart = (id) => {
     console.log("iiiddd",id);
     dispatch(addToCart({pid : id , Qut : count}))
-    // dispatch(IncrementQut({pid : id , Qut : count}))
   }
 
   const productselector = useSelector((state) => state.product);

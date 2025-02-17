@@ -210,10 +210,13 @@ export default function Product() {
     
     return (
         <div>
+            <div>Product</div>
+            <br></br>
             <React.Fragment>
                 <Button variant="outlined" onClick={handleClickOpen}>
                     Open form dialog
                 </Button>
+                <br></br>
                 <Dialog open={open} onClose={handleClose}>
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <DialogTitle>Product Data</DialogTitle>

@@ -172,10 +172,13 @@ export default function SubCategory() {
     // console.log(values)
   return (
     <div>
+        <div>SubCategory</div>
+        <br></br>
       <React.Fragment>
         <Button variant="outlined" onClick={handleClickOpen}>
           Open form dialog
         </Button>
+        <br></br>
         <Dialog
           open={open}
           onClose={handleClose}
