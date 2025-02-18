@@ -8,7 +8,6 @@ const initialState = {
         error: null
 }
 
-
 export const getallCatData = createAsyncThunk(
     'Category/getallCatData',
     async () => {
