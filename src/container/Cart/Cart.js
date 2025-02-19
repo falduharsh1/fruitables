@@ -27,8 +27,8 @@ export default function Cart() {
 
   console.log("cartData", cartData);
 
-  const total_price = cartData?.reduce((acc , v, i) =>  acc + v.Qut * v.price , 0 )
-  console.log("tp",total_price);
+  const total_price = cartData?.reduce((acc, v, i) => acc + v.Qut * v.price, 0)
+  console.log("tp", total_price);
 
   const handleIncre = (id) => {
     console.log("increment_id", id);
@@ -40,7 +40,7 @@ export default function Cart() {
   }
 
   const handleremove = (id) => {
-    dispatch(RemoveProduct({pid : id}))
+    dispatch(RemoveProduct({ pid: id }))
   }
 
   return (
@@ -100,9 +100,9 @@ export default function Cart() {
                       <td>
                         {
 
-                          <p className="mb-0 mt-4">{v?.price * v?.Qut +' ₹'} </p>
+                          <p className="mb-0 mt-4">{v?.price * v?.Qut + ' ₹'} </p>
                         }
-                        
+
                       </td>
                       <td>
                         <button className="btn btn-md rounded-circle bg-light border mt-4"
@@ -250,16 +250,18 @@ export default function Cart() {
                   <p className="mb-0">{total_price + '₹'}</p>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h5 className="mb-0 me-4">Shipping</h5>
+                  <h5 className="mb-0 me-4">Shipping Cost</h5>
                   <div className>
-                    <p className="mb-0">Flat rate: $3.00</p>
+                    <p className="mb-0">
+                      {total_price >= 500 || total_price === 0 ? 'free Shipping'  : '99₹ Shipping Cost'}
+                    </p>
                   </div>
                 </div>
                 <p className="mb-0 text-end">Shipping to Ukraine.</p>
               </div>
               <div className="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                 <h5 className="mb-0 ps-4 me-4">Total</h5>
-                <p className="mb-0 pe-4">$99.00</p>
+                <p className="mb-0 pe-4">{total_price >= 500 || total_price === 0 ? total_price + '₹' : total_price + 99 + '₹'}</p>
               </div>
               <button className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
             </div>

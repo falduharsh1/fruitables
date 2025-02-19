@@ -184,12 +184,10 @@ export default function Product() {
         dispatch(addproduct(values))
         dispatch(getSubByCat())
       }
-    
 
     const { handleSubmit, handleBlur, handleChange, errors, setValues, values, touched, resetForm, setFieldValue } = formik
 
     const DataGet = async () => {
-
         dispatch(getsubcat())
         dispatch(getSubByCat())
         dispatch(getproduct())

@@ -5,6 +5,7 @@ import MyAutoSlice from "../Slice/MyAutoSlice";
 import categorySlice from "../Slice/categorySlice";
 import productSlice from "../Slice/productSlice";
 import cartSlice from "../Slice/cartSlice";
+import couponSlice from "../Slice/couponSlice";
 
 export const rootReducer = combineReducers ({
     count : handleCounter,
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers ({
     subCat : SubCatSlice,
     carts: cartSlice,
     product : productSlice,
+    Coupon : couponSlice
     
 })
