@@ -10,7 +10,8 @@ import ShopDetail from "../container/ShopDetail/ShopDetail";
 import Testimonial from "../container/Testimonial/Testimonial";
 import Main from "../container/Main/Main";
 import Footer from '../component/Footer/Footer';
-import MyAuto from '../container/MyAuto/MyAuto';
+// import MyAuto from '../container/MyAuto/MyAuto';
+import Auth from '../container/Auth/Auth';
 import SubCategory from '../container/SubCategory/SubCategory';
 
 
@@ -31,7 +32,8 @@ export default function UserRoute() {
       <Route path="/Contact" element={<Contact/>} />
       <Route path="/Error404" element={<Error404/>} />
       <Route path="/SubCategory/:id" element={<SubCategory/>} />
-      <Route path="/MyAuto" element={<MyAuto/>} />
+      {/* <Route path="/MyAuto" element={<MyAuto/>} /> */}
+      <Route path="/auth" element={<Auth/>} />
       
     </Routes>
     <Footer/>     

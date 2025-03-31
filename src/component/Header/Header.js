@@ -60,7 +60,7 @@ export default function Header() {
               <i className="fa fa-shopping-bag fa-2x" />
               <span className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style={{top: '-5px', left: 15, height: 20, minWidth: 20}}>{total}</span>
             </NavLink>
-            <NavLink to={"/MyAuto"} className="my-auto">
+            <NavLink to={"/Auth"} className="my-auto">
               <i className="fas fa-user fa-2x" />
             </NavLink>
           </div>
