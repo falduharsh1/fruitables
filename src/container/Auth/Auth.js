@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
-import { useDispatch } from 'react-redux';
-import { userRegister } from '../../redux/Slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin, userRegister } from '../../redux/Slice/authSlice';
+import { redirect, useNavigate } from 'react-router-dom';
 
 
 export default function Auth() {
 
     const [type, setType] = useState("login");
 
-        const dispatch = useDispatch()
+    const dispatch = useDispatch()
+
+    const authSelector = useSelector(state => state.auth)
+
+    console.log(authSelector);
+
+    const navigate = useNavigate();
+    if(authSelector.isValidate){
+        navigate("/");
+    }
 
     let initialValues = {}, validationSchema = {}
 
@@ -52,7 +62,13 @@ export default function Auth() {
         enableReinitialize : true,
         onSubmit: values => {
                   alert(JSON.stringify(values, null, 2));
-                  dispatch(userRegister({...values , role :'user'}))
+
+                if(type === 'login'){
+                    dispatch(userLogin(values))
+                }else if(type === 'register'){
+                    dispatch(userRegister({...values , role :'user'}))
+                }
+                
         },
     })
 
