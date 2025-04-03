@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Cart from "../container/Cart/Cart";
 import Chackout from "../container/Chackout/Chackout";
 import Contact from "../container/Contact/Contact";
@@ -13,9 +13,45 @@ import Footer from '../component/Footer/Footer';
 // import MyAuto from '../container/MyAuto/MyAuto';
 import Auth from '../container/Auth/Auth';
 import SubCategory from '../container/SubCategory/SubCategory';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth } from '../redux/Slice/authSlice';
 
 
 export default function UserRoute() {
+
+  const [loading , isLoading] = useState(true)
+
+  const auth = useSelector(state => state.auth)
+
+  console.log("auth",auth);
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const check_authe = async () => {
+      try {
+         await dispatch(checkAuth())
+      } catch (error) {
+
+        navigate("/")
+
+        console.log(error);
+        
+      }finally{
+        isLoading(false)
+      }
+    }
+
+    check_authe()
+  },[navigate,dispatch])
+
+  if(loading){
+    return(
+      <p>Loading...</p> 
+    )
+  }
   return (
     <>
     <Header/>

@@ -39,9 +39,19 @@ export const userLogout = createAsyncThunk(
 
         console.log(response.data);
 
-        // if(response.data.success){
-        //     // return response.data.data
-        // }
+    }
+)
+
+export const checkAuth = createAsyncThunk(
+    'auth/checkAuth',
+    async () => {
+        const response = await axios.get(BASE_URL + '/user/check-auth', {withCredentials:true})
+
+        console.log(response.data);
+
+        if(response.data.success){
+            return response.data.data
+        }
     }
 )
 
@@ -60,6 +70,12 @@ const authSlice = createSlice({
             state.user = null;
             state.error = null;
             state.isValidate = false;
+        })
+        builder.addCase(checkAuth.fulfilled , (state,action) => {
+            state.isLoading = false;
+            state.user = action.payload;
+            state.error = null;
+            state.isValidate = true;
         })
     }
 })
