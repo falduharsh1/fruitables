@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios";
-import { BASE_URL } from "../../utils/base";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 const initialState = {
         isLoading: false,
@@ -12,7 +11,7 @@ export const getallCatData = createAsyncThunk(
     'Category/getallCatData',
     async () => {
         try {
-            const response = await axios.get(BASE_URL + "/category/list-category")
+            const response = await axiosInstance.get("/category/list-category")
 
             return response.data.data
         } catch (error) {
@@ -29,7 +28,7 @@ export const CategoryDataget = createAsyncThunk(
         try {
             console.log(data);
             
-            const response = await axios.post(BASE_URL + "/category/post-category", data ,{
+            const response = await axiosInstance.post("/category/post-category", data ,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -50,7 +49,7 @@ export const deleteCategory = createAsyncThunk(
     'Category/deleteCategory',
     async (id) => {
         try {
-            const response = await axios.delete(BASE_URL + "/category/delete-category/" + id)
+            const response = await axiosInstance.delete("/category/delete-category/" + id)
 
             return response.data.data._id
         } catch (error) {
@@ -64,7 +63,7 @@ export const editCategory = createAsyncThunk(
     'Category/editCategory',
     async (data) => {
         try {
-            const response = await axios.put(BASE_URL + "/category/put-category/" + data._id , data , {
+            const response = await axiosInstance.put("/category/put-category/" + data._id , data , {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }

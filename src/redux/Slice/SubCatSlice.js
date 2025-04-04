@@ -2,6 +2,7 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 // export const initialState = {
 //     isLoading : false,
@@ -48,7 +49,7 @@ export const getsubcat = createAsyncThunk(
     'subCat/getsubcat',
     async () => {
         try {
-            const response = await axios.get("http://localhost:8000/api/v1/subcategory/list-subcategory");
+            const response = await axiosInstance.get("/subcategory/list-subcategory");
 
             console.log(response);
 
@@ -61,30 +62,11 @@ export const getsubcat = createAsyncThunk(
     }
 )
 
-// export const getOneDataSubCat = createAsyncThunk(
-//     'subCat/getOneDataSubCat',
-//     async (data) => {
-//         try {
-//             const response = await axios.post("http://localhost:8000/subCategory", data ,{
-//                 headers: {
-//                     'Content-Type': 'multipart/form-data'
-//                   }
-//             })
-
-//             return response.data.data
-            
-//         } catch (error) {
-//             console.log(error);
-            
-//         }
-//     }
-// )
-
 export const addSubCat = createAsyncThunk(
     'subCat/addSubCat',
     async (data) => {
         try {
-            const response = await axios.post("http://localhost:8000/api/v1/subCategory/post-subcategory", data,{
+            const response = await axiosInstance.post("/subCategory/post-subcategory", data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -105,7 +87,7 @@ export const deleteSubCat = createAsyncThunk(
         try {
             console.log(id);
             
-            const response = await axios.delete("http://localhost:8000/api/v1/subCategory/delete-subcategory/" + id)
+            const response = await axiosInstance.delete("/subCategory/delete-subcategory/" + id)
 
             return response.data.data._id
             
@@ -120,7 +102,7 @@ export const editSubCat = createAsyncThunk(
     'subCat/editSubCat',
     async (data) => {
         try {
-            const response = await axios.put("http://localhost:8000/api/v1/subCategory/put-subcategory/" + data._id, data,{
+            const response = await axiosInstance.put("/subCategory/put-subcategory/" + data._id, data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
