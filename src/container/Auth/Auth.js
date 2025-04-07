@@ -1,32 +1,74 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginuser, userRegister } from '../../redux/Slice/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Auth() {
 
     const [type, setType] = useState("login");
 
-    let authSchema = object({
-        name: string().required(),
-        email: string().email(),
-        password : string().min(6, "Password must be at least 6 characters").required()
-      });
+    const dispatch = useDispatch()
+
+    const authSelector = useSelector(state => state.auth)
+
+    const navigate = useNavigate()
+
+    if(authSelector.isValidate){
+        navigate("/")
+    }
+
+    let initialValues = {}, validationSchema = {}
+
+    if (type === 'login') {
+        validationSchema = {
+            email: string().email().required(),
+            password: string().required()
+        }
+        initialValues = {
+            email: '',
+            password: ''
+        }
+    } else if (type === 'register') {
+        validationSchema = {
+            name: string().required(),
+            email: string().email().required(),
+            password: string().required()
+        }
+        initialValues = {
+            name: '',
+            email: '',
+            password: ''
+        }
+    } else {
+        validationSchema = {
+            password: string().required()
+        }
+        initialValues = {
+            password: ''
+        }
+    }
+
+    const authSchema = object(validationSchema)
 
     const formik = useFormik({
-        initialValues: {
-          name: '',
-          email: '',
-          password: '',
-        },
+        initialValues: initialValues,
         validationSchema: authSchema,
+        enableReinitialize: true,
         onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
+            alert(JSON.stringify(values, null, 2));
+
+            if(type ==='login'){
+                dispatch(loginuser(values))
+            }else if(type === 'register'){
+                dispatch(userRegister({...values, role :'user'}))
+            }
         },
-      });
+    });
 
-      const { handleSubmit, handleBlur, handleChange, errors, setValues, values, touched, setFieldValue, resetForm } = formik;
-
+    const { handleSubmit, handleBlur, handleChange, errors, setValues, values, touched, setFieldValue, resetForm } = formik;
 
     return (
         <div>
@@ -34,13 +76,13 @@ export default function Auth() {
             <div className="container-fluid page-header py-5">
                 <h1 className="text-center text-white display-6">
                     {
-                        type === "login" ? "Login" : type === "register" ? "register" : "Forgot password"
+                        type === 'login' ? 'Login' : type === 'register' ? "register" : "Forgot Password"
                     }
                 </h1>
                 <ol className="breadcrumb justify-content-center mb-0">
                     <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li className="breadcrumb-item active text-white">{type === 'login' ? "login" : type === 'register' ? 'register' : 'forgot password'
+                    <li className="breadcrumb-item active text-white">{type === 'login' ? 'Login' : type === 'register' ? "register" : "Forgot Password"
                     }</li>
                 </ol>
             </div>
@@ -53,36 +95,46 @@ export default function Auth() {
 
                             <div className="col-lg-7">
                                 <form action className onSubmit={handleSubmit}>
-                                    
-                                    {type === "login" || type === "password" ? "" : <input type="text" className="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name"
-                                    name='name' 
-                                    value={values.name}
-                                    error={errors.name && touched.name}
-                                    helperText={errors.name && touched.name ? errors.name : ''}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}/>
+
+                                    {type === "login" || type === "password" ? "" :
+                                        <>
+                                            <input type="text" className="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name"
+                                                name='name'
+                                                value={values.name}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            <span style={{color : 'red'}}>{errors.name && touched.name ? errors.name : ''}</span>
+                                        </>
                                     }
 
-                                    <input type="email" className="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" 
-                                     name='email' 
-                                     value={values.email}
-                                     error={errors.email && touched.email}
-                                     helperText={errors.email && touched.email ? errors.email : ''}
-                                     onChange={handleChange}
-                                     onBlur={handleBlur}/>
-
-                                     
-                                    {
-                                        type !== "password" ? <input className="w-100 form-control border-0 mb-4" 
-                                        placeholder="Your password" 
-                                        name='password'
-                                        value={values.password}
-                                        error={errors.password && touched.password}
-                                        helperText={errors.password && touched.password ? errors.password : ''}
+                                    <input type="email" className="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email"
+                                        name='email'
+                                        value={values.email}
                                         onChange={handleChange}
-                                        onBlur={handleBlur} />
-                                        
+                                        onBlur={handleBlur}
+                                    />
+
+                                    <span style={{color : 'red'}}>{errors.email && touched.email ? errors.email : ''}</span>
+
+
+                                    {
+                                        type !== "password" ?
+                                            <>
+                                                <input className="w-100 form-control border-0 mb-4"
+                                                    placeholder="Your password"
+                                                    name='password'
+                                                    value={values.password}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                />
+
+                                                <span style={{color : 'red'}}>{errors.password && touched.password ? errors.password : ''}</span>
+                                            </>
+
                                             : null
+
+
                                     }
 
                                     <button className="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit"> {
@@ -90,17 +142,21 @@ export default function Auth() {
                                     }</button>
 
                                     {
-                                        type === "login" ?
+                                        type === 'login' ?
                                             <>
-                                                <a onClick={() => setType("password")} href='#'>Forget password</a>
+                                                <a onClick={() => setType("password")} href='#'>Forgot Password</a>
                                                 <br></br>
-                                                <a onClick={() => setType("register")} href='#'>Don't have a acount ? Create</a>
-                                            </>
-                                            :
-                                            type === "password" ?
-                                                <a onClick={() => setType("login")} href='#'>You have acount ?</a>
-                                                :
-                                                null
+                                                <a onClick={() => setType("register")} href='#'>you dont have acount ? register</a>
+                                            </> :
+                                            type === 'password' ?
+                                                <a onClick={() => setType("login")} href='#'>you have already an acount ? Login</a>
+                                                : null
+                                    }
+
+                                    {
+                                        type === 'register' ?
+                                            <a onClick={() => setType("login")} href='#'>you have already an acount ? Login</a>
+                                            : null
                                     }
                                 </form>
                             </div>

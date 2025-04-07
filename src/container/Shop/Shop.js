@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
-import { getproduct } from '../../redux/Slice/productSlice';
+import { getproduct } from '../../redux/Slice//ProductSlice';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
@@ -146,7 +146,7 @@ export default function Shop() {
                       <br></br>
 
                       {
-                        CatgorySelector.Category.map((v) => (
+                        CatgorySelector.Category?.map((v) => (
                           <ul className="list-unstyled fruite-categorie">
                             <li>
                               <div className="d-flex justify-content-between fruite-name"

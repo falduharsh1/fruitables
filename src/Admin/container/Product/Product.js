@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getallCatData } from '../../../redux/Slice/categorySlice';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { addproduct, deleteproduct, editproduct, getproduct, getSubByCat } from '../../../redux/Slice/productSlice';
+import { addproduct, deleteproduct, editproduct, getproduct, getSubByCat } from '../../../redux/Slice//ProductSlice';
 import { getsubcat } from '../../../redux/Slice/SubCatSlice';
 
 export default function Product() {
