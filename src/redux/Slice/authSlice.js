@@ -12,7 +12,7 @@ const initialState = {
 export const userRegister = createAsyncThunk(
     'auth/userRegister',
     async (data) => {
-        const response = await axiosInstance.post( '/user/user-register' , data)
+        const response = await axiosInstance.post( 'user/user-register' , data)
 
         console.log(response);
         
@@ -22,7 +22,7 @@ export const userRegister = createAsyncThunk(
 export const userLogin = createAsyncThunk(
     'auth/userLogin',
     async (data) => {
-        const response = await axiosInstance.post( '/user/user-login', data)
+        const response = await axiosInstance.post( 'user/user-login', data)
 
         console.log(response.data);
 
@@ -35,7 +35,7 @@ export const userLogin = createAsyncThunk(
 export const userLogout = createAsyncThunk(
     'auth/userLogout',
     async (id) => {
-        const response = await axiosInstance.post( '/user/logout-user', {_id : id})
+        const response = await axiosInstance.post( 'user/logout-user', {_id : id})
 
         console.log(response.data);
 
@@ -45,7 +45,7 @@ export const userLogout = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
     'auth/checkAuth',
     async () => {
-        const response = await axiosInstance.get( '/user/check-auth')
+        const response = await axiosInstance.get( 'user/check-auth')
 
         console.log(response.data);
 

@@ -49,7 +49,7 @@ export const getsubcat = createAsyncThunk(
     'subCat/getsubcat',
     async () => {
         try {
-            const response = await axiosInstance.get("/subcategory/list-subcategory");
+            const response = await axiosInstance.get("subcategory/list-subcategory");
 
             console.log(response);
 
@@ -66,7 +66,7 @@ export const addSubCat = createAsyncThunk(
     'subCat/addSubCat',
     async (data) => {
         try {
-            const response = await axiosInstance.post("/subCategory/post-subcategory", data,{
+            const response = await axiosInstance.post("subCategory/post-subcategory", data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -87,7 +87,7 @@ export const deleteSubCat = createAsyncThunk(
         try {
             console.log(id);
             
-            const response = await axiosInstance.delete("/subCategory/delete-subcategory/" + id)
+            const response = await axiosInstance.delete("subCategory/delete-subcategory/" + id)
 
             return response.data.data._id
             
@@ -102,7 +102,7 @@ export const editSubCat = createAsyncThunk(
     'subCat/editSubCat',
     async (data) => {
         try {
-            const response = await axiosInstance.put("/subCategory/put-subcategory/" + data._id, data,{
+            const response = await axiosInstance.put("subCategory/put-subcategory/" + data._id, data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }

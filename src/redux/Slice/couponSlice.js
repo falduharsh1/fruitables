@@ -13,7 +13,7 @@ export const getCoupon = createAsyncThunk(
     'Coupon/getCoupon',
     async () => {
         try {
-            const response = await axiosInstance.get( "/coupon/get-coupon")
+            const response = await axiosInstance.get( "coupon/get-coupon")
 
             return response.data.data
         } catch (error) {
@@ -26,7 +26,7 @@ export const postCoupon = createAsyncThunk(
     'Coupon/postCoupon',
     async (data) => {
         try {
-            const response = await axiosInstance.post( "/coupon/post-coupon",data)
+            const response = await axiosInstance.post( "coupon/post-coupon",data)
 
             return response.data.data
         } catch (error) {
@@ -39,7 +39,7 @@ export const putCoupon = createAsyncThunk(
     'Coupon/putCoupon',
     async (data) => {
         try {
-            const response = await axiosInstance.put( "/coupon/put-coupon/" + data._id , data)
+            const response = await axiosInstance.put( "coupon/put-coupon/" + data._id , data)
 
             return response.data.data
 
@@ -53,7 +53,7 @@ export const deleteCoupon = createAsyncThunk(
     'Coupon/deleteCoupon',
     async (id) => {
         try {
-            const response = await axiosInstance.delete( "/coupon/delete-coupon/" + id)
+            const response = await axiosInstance.delete( "coupon/delete-coupon/" + id)
 
             return response.data.data._id
 

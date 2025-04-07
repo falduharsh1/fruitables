@@ -49,7 +49,7 @@ export const deleteCategory = createAsyncThunk(
     'Category/deleteCategory',
     async (id) => {
         try {
-            const response = await axiosInstance.delete("/category/delete-category/" + id)
+            const response = await axiosInstance.delete("category/delete-category/" + id)
 
             return response.data.data._id
         } catch (error) {
@@ -63,7 +63,7 @@ export const editCategory = createAsyncThunk(
     'Category/editCategory',
     async (data) => {
         try {
-            const response = await axiosInstance.put("/category/put-category/" + data._id , data , {
+            const response = await axiosInstance.put("category/put-category/" + data._id , data , {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }

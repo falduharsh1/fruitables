@@ -12,7 +12,7 @@ export const getproduct = createAsyncThunk(
     'product/getproduct',
     async () => {
         try {
-            const response = await axiosInstance.get("/product/list-product");
+            const response = await axiosInstance.get("product/list-product");
 
             console.log(response.data.data);
 
@@ -30,7 +30,7 @@ export const addproduct = createAsyncThunk(
         try {
             console.log("helllo");
             
-            const response = await axiosInstance.post("/product/post-product", data,{
+            const response = await axiosInstance.post("product/post-product", data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -51,7 +51,7 @@ export const deleteproduct = createAsyncThunk(
         try {
             console.log(id);
             
-            const response = await axiosInstance.delete("/product/delete-product/" + id)
+            const response = await axiosInstance.delete("product/delete-product/" + id)
 
             return response.data.data._id
             
@@ -66,7 +66,7 @@ export const editproduct = createAsyncThunk(
     'product/editproduct',
     async (data) => {
         try {
-            const response = await axiosInstance.put("/product/put-product/" + data._id, data,{
+            const response = await axiosInstance.put("product/put-product/" + data._id, data,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -86,7 +86,7 @@ export const getSubByCat = createAsyncThunk(
         try {
             console.log(category_id);
             
-            const response = await axiosInstance.get("/product/getSubByCat/" + category_id)
+            const response = await axiosInstance.get("product/getSubByCat/" + category_id)
 
             console.log("SubCategoryget", response.data.data);
             

@@ -3,11 +3,11 @@ import handleCounter from "./CounterReducer";
 import SubCatSlice from "../Slice/SubCatSlice";
 import MyAutoSlice from "../Slice/MyAutoSlice";
 import categorySlice from "../Slice/categorySlice";
-import productSlice from "../Slice/productSlice";
+import productSlice from "../Slice//ProductSlice";
 import cartSlice from "../Slice/cartSlice";
 import couponSlice from "../Slice/couponSlice";
 import authSlice from "../Slice/authSlice";
-
+import errorSlice from "../Slice/errorSlice";
 
 export const rootReducer = combineReducers ({
     count : handleCounter,
@@ -17,6 +17,7 @@ export const rootReducer = combineReducers ({
     carts: cartSlice,
     product : productSlice,
     Coupon : couponSlice,
-    auth : authSlice
+    auth : authSlice,
+    alert : errorSlice
     
 })

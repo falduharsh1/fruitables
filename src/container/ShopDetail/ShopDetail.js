@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { getproduct } from '../../redux/Slice/productSlice';
+import { getproduct } from '../../redux/Slice//ProductSlice';
 // import { decrement, increment } from '../../../src/redux/action/counter.action'
 // import { addToCart } from '../../redux/Slice/CartSlice';
 import { addToCart, DecrementQut, IncrementQut } from '../../redux/Slice/cartSlice';
