@@ -61,7 +61,7 @@ export default function Auth() {
         validationSchema : authSchema,
         enableReinitialize : true,
         onSubmit: values => {
-                  alert(JSON.stringify(values, null, 2));
+                //   alert(JSON.stringify(values, null, 2));
 
                 if(type === 'login'){
                     dispatch(userLogin(values))

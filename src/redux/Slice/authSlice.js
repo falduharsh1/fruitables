@@ -1,77 +1,130 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 import { axiosInstance } from "../../utils/axiosInstance"
+import { setAlert } from "./errorSlice"
 
 const initialState = {
-    isLoading : false,
-    user : null,
-    error : null,
-    isValidate : false
+    isLoading: false,
+    user: null,
+    error: null,
+    isValidate: false
 }
 
 export const userRegister = createAsyncThunk(
     'auth/userRegister',
-    async (data) => {
-        const response = await axiosInstance.post( 'user/user-register' , data)
+    async (data, { dispatch }) => {
 
-        console.log(response);
-        
+        try {
+
+            const response = await axiosInstance.post('user/user-register', data)
+
+            console.log(response);
+
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+            }
+
+        } catch (error) {
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+
+        }
+
     }
 )
 
 export const userLogin = createAsyncThunk(
     'auth/userLogin',
-    async (data) => {
-        const response = await axiosInstance.post( 'user/user-login', data)
+    async (data, { dispatch, rejectWithValue }) => {
 
-        console.log(response.data);
+        try {
 
-        if(response.data.success){
-            return response.data.data
+            const response = await axiosInstance.post('user/user-login', data)
+
+            console.log(response.data);
+
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+                return response.data.data
+            }
+
+        } catch (error) {
+
+            console.log(error);
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
+
         }
+
     }
 )
 
 export const userLogout = createAsyncThunk(
     'auth/userLogout',
-    async (id) => {
-        const response = await axiosInstance.post( 'user/logout-user', {_id : id})
+    async (id, { dispatch, rejectWithValue }) => {
 
-        console.log(response.data);
+        try {
 
+            const response = await axiosInstance.post('user/logout-user', { _id: id })
+
+            console.log(response.data);
+
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+            }
+
+        } catch (error) {
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
+
+        }
     }
 )
 
 export const checkAuth = createAsyncThunk(
     'auth/checkAuth',
     async () => {
-        const response = await axiosInstance.get( 'user/check-auth')
+        const response = await axiosInstance.get('user/check-auth')
 
         console.log(response.data);
 
-        if(response.data.success){
+        if (response.data.success) {
             return response.data.data
         }
     }
 )
 
 const authSlice = createSlice({
-    name : 'auth',
+    name: 'auth',
     initialState,
-    extraReducers : (builder) => {
-        builder.addCase(userLogin.fulfilled , (state,action) => {
+    extraReducers: (builder) => {
+        builder.addCase(userLogin.fulfilled, (state, action) => {
             state.isLoading = false;
             state.user = action.payload;
             state.error = null;
             state.isValidate = true;
         })
-        builder.addCase(userLogout.fulfilled , (state,action) => {
+        builder.addCase(userLogin.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.error = action.payload;
+            state.isValidate = false;
+        })
+        builder.addCase(userLogout.fulfilled, (state, action) => {
             state.isLoading = false;
             state.user = null;
             state.error = null;
             state.isValidate = false;
         })
-        builder.addCase(checkAuth.fulfilled , (state,action) => {
+        builder.addCase(userLogout.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.error = action.payload;
+            state.isValidate = false;
+        })
+        builder.addCase(checkAuth.fulfilled, (state, action) => {
             state.isLoading = false;
             state.user = action.payload;
             state.error = null;

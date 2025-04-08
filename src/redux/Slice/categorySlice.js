@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { axiosInstance } from "../../utils/axiosInstance";
+import { setAlert } from "./errorSlice";
 
 const initialState = {
         isLoading: false,
@@ -24,7 +25,7 @@ export const getallCatData = createAsyncThunk(
 
 export const CategoryDataget = createAsyncThunk(
     'Category/CategoryDataget',
-    async (data) => {
+    async (data,{dispatch}) => {
         try {
             console.log(data);
             
@@ -36,8 +37,11 @@ export const CategoryDataget = createAsyncThunk(
 
             console.log(response.data);
 
-            return response.data.data
-            
+            if(response.data.success){
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+                return response.data.data
+            }
+
         } catch (error) {
             console.log(error);
             
@@ -47,11 +51,16 @@ export const CategoryDataget = createAsyncThunk(
 
 export const deleteCategory = createAsyncThunk(
     'Category/deleteCategory',
-    async (id) => {
+    async (id,{dispatch}) => {
         try {
             const response = await axiosInstance.delete("category/delete-category/" + id)
 
-            return response.data.data._id
+            if(response.data.success){
+
+                dispatch(setAlert({variant : "success" , message : response.data.message }))
+                return response.data.data._id
+
+            }
         } catch (error) {
             console.log(error);
             
@@ -61,7 +70,7 @@ export const deleteCategory = createAsyncThunk(
 
 export const editCategory = createAsyncThunk(
     'Category/editCategory',
-    async (data) => {
+    async (data,{dispatch}) => {
         try {
             const response = await axiosInstance.put("category/put-category/" + data._id , data , {
                 headers: {
@@ -69,6 +78,15 @@ export const editCategory = createAsyncThunk(
                   }
             })
 
+            console.log(response);
+            
+
+            if(response.data.success){
+
+                dispatch(setAlert({variant : "success" , message : response.data.message }))
+                return response.data.data
+
+            }
             return response.data.data
         } catch (error) {
             console.log(error);
