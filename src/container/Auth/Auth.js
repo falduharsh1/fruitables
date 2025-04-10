@@ -17,7 +17,7 @@ export default function Auth() {
     console.log(authSelector);
 
     const navigate = useNavigate();
-    if(authSelector.isValidate){
+    if (authSelector.isValidate) {
         navigate("/");
     }
 
@@ -28,10 +28,10 @@ export default function Auth() {
             email: string().email().required(),
             password: string().min(6, "Password must be at least 6 characters").required()
         }
-            initialValues = {
-                email: "",
-                password: ""
-            }
+        initialValues = {
+            email: "",
+            password: ""
+        }
     } else if (type === 'register') {
         validationSchema = {
             name: string().required(),
@@ -54,26 +54,33 @@ export default function Auth() {
 
     const authSchema = object(validationSchema)
 
-    validationSchema = {authSchema}
+    validationSchema = { authSchema }
 
     const formik = useFormik({
         initialValues: initialValues,
-        validationSchema : authSchema,
-        enableReinitialize : true,
+        validationSchema: authSchema,
+        enableReinitialize: true,
         onSubmit: values => {
-                //   alert(JSON.stringify(values, null, 2));
+            //   alert(JSON.stringify(values, null, 2));
 
-                if(type === 'login'){
-                    dispatch(userLogin(values))
-                }else if(type === 'register'){
-                    dispatch(userRegister({...values , role :'user'}))
-                }
-                
+            if (type === 'login') {
+                dispatch(userLogin(values))
+            } else if (type === 'register') {
+                dispatch(userRegister({ ...values, role: 'user' }))
+            }
+
         },
     })
 
     const { handleSubmit, handleBlur, handleChange, errors, setValues, values, touched, setFieldValue, resetForm } = formik;
 
+    const googleLogin = () => {
+        try {
+            window.location.href = 'http://localhost:8000/api/v1/user/google'
+        } catch (error) {
+            console.log("error",error);
+        }
+    }
 
     return (
         <div>
@@ -109,7 +116,7 @@ export default function Auth() {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur} />
                                             {
-                                                <span style={{color : 'red'}}>{errors.name && touched.name ? errors.name : ''}</span>
+                                                <span style={{ color: 'red' }}>{errors.name && touched.name ? errors.name : ''}</span>
                                             }
                                         </>
                                     }
@@ -120,7 +127,7 @@ export default function Auth() {
                                         onChange={handleChange}
                                         onBlur={handleBlur} />
                                     {
-                                        <span style={{color : 'red'}}>{errors.email && touched.email ? errors.email : ''}</span>
+                                        <span style={{ color: 'red' }}>{errors.email && touched.email ? errors.email : ''}</span>
                                     }
 
 
@@ -134,7 +141,7 @@ export default function Auth() {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur} />
                                                 {
-                                                    <span style={{color : 'red'}}>{errors.password && touched.password ? errors.password : ''}</span>
+                                                    <span style={{ color: 'red' }}>{errors.password && touched.password ? errors.password : ''}</span>
                                                 }
                                             </>
                                             : null
@@ -163,6 +170,7 @@ export default function Auth() {
                                     {
                                         type === "register" ? <a onClick={() => setType("login")} href='#'>You have acount ?Login</a> : null
                                     }
+                                    <button onClick={googleLogin} className="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Login with google</button>
                                 </form>
                             </div>
                         </div>
