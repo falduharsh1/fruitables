@@ -20,6 +20,8 @@ export const userRegister = createAsyncThunk(
 
             console.log(response);
 
+            localStorage.setItem("UserEmail",data.email)
+
             if (response.data.success) {
                 dispatch(setAlert({ variant: "success", message: response.data.message }))
             }
@@ -83,6 +85,7 @@ export const userLogout = createAsyncThunk(
     }
 )
 
+
 export const checkAuth = createAsyncThunk(
     'auth/checkAuth',
     async () => {
@@ -92,6 +95,29 @@ export const checkAuth = createAsyncThunk(
 
         if (response.data.success) {
             return response.data.data
+        }
+    }
+)
+
+export const checkOTP = createAsyncThunk(
+    'auth/checkOTP',
+    async (data, { dispatch, rejectWithValue }) => {
+
+        try {
+
+            const response = await axiosInstance.post('user/check-verification', data)
+
+            console.log(response.data);
+
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+            }
+
+        } catch (error) {
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
+
         }
     }
 )
