@@ -15,6 +15,7 @@ import Auth from '../container/Auth/Auth';
 import SubCategory from '../container/SubCategory/SubCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from '../redux/Slice/authSlice';
+import Chat from '../container/Chat/Chat';
 
 
 export default function UserRoute() {
@@ -70,6 +71,8 @@ export default function UserRoute() {
       <Route path="/SubCategory/:id" element={<SubCategory/>} />
       {/* <Route path="/MyAuto" element={<MyAuto/>} /> */}
       <Route path="/auth" element={<Auth/>} />
+      <Route path="/Chat" element={<Chat/>} />
+
       
     </Routes>
     <Footer/>     

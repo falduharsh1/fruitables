@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkOTP, userLogin, userRegister } from '../../redux/Slice/authSlice';
+import { checkOTP, forgotPassword, userLogin, userRegister } from '../../redux/Slice/authSlice';
 import { redirect, useNavigate } from 'react-router-dom';
 
 
@@ -89,13 +89,19 @@ export default function Auth() {
                 const res = await dispatch(checkOTP({otp : values.otp , email : userEmail}))
 
                 
-
                 if (res.type === "auth/checkOTP/fulfilled") {
                     setType("login")
                     localStorage.removeItem('UserEmail')
-                    setuserEmail('')
+                    setuserEmail('')    
                 }
+
             }
+            // else if (type === 'password') {
+            //     const res = await dispatch(forgotPassword({email : values.email}))
+            //     console.log(res);
+            //     console.log("userEmail",userEmail);
+                
+            // }
 
             resetForm()
 
@@ -253,30 +259,4 @@ export default function Auth() {
     )
 }
 
-
-
-
-{/* Register Form */ }
-//  <div className="tab-pane fade" id="registerTab">
-//  <h4 className="text-center mb-4">Register</h4>
-//  <form>
-//    {/* Name Field */}
-//    <div className="mb-3">
-//      <label htmlFor="registerName" className="form-label">Name</label>
-//      <input type="text" className="form-control" id="registerName" placeholder="Enter your name" required />
-//    </div>
-//    {/* Email Field */}
-//    <div className="mb-3">
-//      <label htmlFor="registerEmail" className="form-label">Email</label>
-//      <input type="email" className="form-control" id="registerEmail" placeholder="Enter your email" required />
-//    </div>
-//    {/* Password Field */}
-//    <div className="mb-3">
-//      <label htmlFor="registerPassword" className="form-label">Password</label>
-//      <input type="password" className="form-control" id="registerPassword" placeholder="Enter your password" required />
-//    </div>
-//    {/* Submit Button */}
-//    <button type="submit" className="btn btn-success w-100 btn-custom">Register</button>
-//  </form>
-// </div>
 
