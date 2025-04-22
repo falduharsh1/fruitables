@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Chackout() {
+  
+  const Theme = useContext(ThemeContext)
+    
+      console.log(Theme);
+
   return (
-<div className="container-fluid py-5">
+<div className={`container-fluid py-5 ${Theme.Theme}`}>
   <div className="container py-5">
-    <h1 className="mb-4">Billing details</h1>
+    <h1 className="mb-4" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Billing details</h1>
     <form action="#">
       <div className="row g-5">
         <div className="col-md-12 col-lg-6 col-xl-7">
@@ -68,11 +74,11 @@ export default function Chackout() {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Products</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
+                  <th scope="col" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Products</th>
+                  <th scope="col" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Name</th>
+                  <th scope="col" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Price</th>
+                  <th scope="col" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Quantity</th>
+                  <th scope="col" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,10 +88,10 @@ export default function Chackout() {
                       <img src="img/vegetable-item-2.jpg" className="img-fluid rounded-circle" style={{width: 90, height: 90}} alt />
                     </div>
                   </th>
-                  <td className="py-5">Awesome Brocoli</td>
-                  <td className="py-5">$69.00</td>
-                  <td className="py-5">2</td>
-                  <td className="py-5">$138.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Awesome Brocoli</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$69.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>2</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$138.00</td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -93,10 +99,10 @@ export default function Chackout() {
                       <img src="img/vegetable-item-5.jpg" className="img-fluid rounded-circle" style={{width: 90, height: 90}} alt />
                     </div>
                   </th>
-                  <td className="py-5">Potatoes</td>
-                  <td className="py-5">$69.00</td>
-                  <td className="py-5">2</td>
-                  <td className="py-5">$138.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Potatoes</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$69.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>2</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$138.00</td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -104,22 +110,22 @@ export default function Chackout() {
                       <img src="img/vegetable-item-3.png" className="img-fluid rounded-circle" style={{width: 90, height: 90}} alt />
                     </div>
                   </th>
-                  <td className="py-5">Big Banana</td>
-                  <td className="py-5">$69.00</td>
-                  <td className="py-5">2</td>
-                  <td className="py-5">$138.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Big Banana</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$69.00</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>2</td>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$138.00</td>
                 </tr>
                 <tr>
                   <th scope="row">
                   </th>
-                  <td className="py-5" />
-                  <td className="py-5" />
-                  <td className="py-5">
-                    <p className="mb-0 text-dark py-3">Subtotal</p>
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }} />
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }} />
+                  <td className="py-5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>
+                    <p className="mb-0 py-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Subtotal</p>
                   </td>
                   <td className="py-5">
                     <div className="py-3 border-bottom border-top">
-                      <p className="mb-0 text-dark">$414.00</p>
+                      <p className="mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$414.00</p>
                     </div>
                   </td>
                 </tr>
@@ -127,20 +133,20 @@ export default function Chackout() {
                   <th scope="row">
                   </th>
                   <td className="py-5">
-                    <p className="mb-0 text-dark py-4">Shipping</p>
+                    <p className="mb-0 py-4" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Shipping</p>
                   </td>
                   <td colSpan={3} className="py-5">
                     <div className="form-check text-start">
                       <input type="checkbox" className="form-check-input bg-primary border-0" id="Shipping-1" name="Shipping-1" defaultValue="Shipping" />
-                      <label className="form-check-label" htmlFor="Shipping-1">Free Shipping</label>
+                      <label className="form-check-label" htmlFor="Shipping-1" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Free Shipping</label>
                     </div>
                     <div className="form-check text-start">
                       <input type="checkbox" className="form-check-input bg-primary border-0" id="Shipping-2" name="Shipping-1" defaultValue="Shipping" />
-                      <label className="form-check-label" htmlFor="Shipping-2">Flat rate: $15.00</label>
+                      <label className="form-check-label" htmlFor="Shipping-2" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Flat rate: $15.00</label>
                     </div>
                     <div className="form-check text-start">
                       <input type="checkbox" className="form-check-input bg-primary border-0" id="Shipping-3" name="Shipping-1" defaultValue="Shipping" />
-                      <label className="form-check-label" htmlFor="Shipping-3">Local Pickup: $8.00</label>
+                      <label className="form-check-label" htmlFor="Shipping-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Local Pickup: $8.00</label>
                     </div>
                   </td>
                 </tr>
@@ -148,13 +154,13 @@ export default function Chackout() {
                   <th scope="row">
                   </th>
                   <td className="py-5">
-                    <p className="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                    <p className="mb-0 text-uppercase py-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>TOTAL</p>
                   </td>
                   <td className="py-5" />
                   <td className="py-5" />
                   <td className="py-5">
                     <div className="py-3 border-bottom border-top">
-                      <p className="mb-0 text-dark">$135.00</p>
+                      <p className="mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$135.00</p>
                     </div>
                   </td>
                 </tr>
@@ -167,7 +173,7 @@ export default function Chackout() {
                 <input type="checkbox" className="form-check-input bg-primary border-0" id="Transfer-1" name="Transfer" defaultValue="Transfer" />
                 <label className="form-check-label" htmlFor="Transfer-1">Direct Bank Transfer</label>
               </div>
-              <p className="text-start text-dark">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+              <p className="text-start " style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
             </div>
           </div>
           <div className="row g-4 text-center align-items-center justify-content-center border-bottom py-3">

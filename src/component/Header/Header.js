@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { userLogout } from '../../redux/Slice/authSlice';
+import { ThemeContext } from '../../context/ThemeContext';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 export default function Header() {
 
@@ -22,6 +25,14 @@ export default function Header() {
      dispatch(userLogout( authSelector.user._id))
   }
 
+  const Theme = useContext(ThemeContext)
+
+  console.log(Theme);
+
+  const handleTheme = () => {
+    Theme.toggle_theme(Theme.Theme)
+  }
+
   return (
     <div>
       {/* Spinner Start */}
@@ -30,7 +41,7 @@ export default function Header() {
   </div> */}
       {/* Spinner End */}
       {/* Navbar start */}
-      <div className="container-fluid fixed-top">
+      <div className={`container-fluid fixed-top ${Theme.Theme}`}>
         <div className="container topbar bg-primary d-none d-lg-block">
           <div className="d-flex justify-content-between">
             <div className="top-info ps-2">
@@ -45,13 +56,13 @@ export default function Header() {
           </div>
         </div>
         <div className="container px-0">
-          <nav className="navbar navbar-light bg-white navbar-expand-xl">
+          <nav className="navbar navbar-expand-xl">
             <a href="index.html" className="navbar-brand"><h1 className="text-primary display-6">Fruitables</h1></a>
             <button className="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
               <span className="fa fa-bars text-primary" />
             </button>
-            <div className="collapse navbar-collapse bg-white" id="navbarCollapse">
-              <div className="navbar-nav mx-auto">
+            <div className="collapse navbar-collapse" id="navbarCollapse">
+                <div className="navbar-nav mx-auto" style={{color: Theme.Theme === 'light' ? '#000000' : '#ffffff'}}>
                 <NavLink to={"/"} className="nav-item nav-link active">Home</NavLink>
                 <NavLink to={"/Shop"} className="nav-item nav-link">Shop</NavLink>
                 <NavLink to={"/ShopDetail"} className="nav-item nav-link">Shop Detail</NavLink>
@@ -65,9 +76,10 @@ export default function Header() {
                   </div>
                 </div>
                 <NavLink to={"/Contact"} className="nav-item nav-link">Contact</NavLink>
-                <NavLink to={"/Chat"} className="nav-item nav-link">Chat</NavLink>
+                <NavLink to={"/Chat"} className="nav-item nav-link">Chat</NavLink>  
               </div>
               <div className="d-flex m-3 me-0">
+                <button onClick={() => handleTheme()}  style={{ marginRight: '16.5px' , borderRadius : '40px' , backgroundColor : 'white' , width : '46px' , height : '46px'}}>{Theme.Theme === 'light' ? <DarkModeIcon/> : <LightModeIcon/> } </button>
                 <button className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i className="fas fa-search text-primary" /></button>
                 <NavLink to={"/Cart"} className="position-relative me-4 my-auto">
                   <i className="fa fa-shopping-bag fa-2x" />

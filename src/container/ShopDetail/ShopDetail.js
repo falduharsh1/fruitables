@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getproduct } from '../../redux/Slice//ProductSlice';
 // import { decrement, increment } from '../../../src/redux/action/counter.action'
 // import { addToCart } from '../../redux/Slice/CartSlice';
 import { addToCart, DecrementQut, IncrementQut } from '../../redux/Slice/cartSlice';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function ShopDetail(props) {
 
@@ -40,9 +41,12 @@ export default function ShopDetail(props) {
         DataGet()
     }, [])
   
+    const Theme = useContext(ThemeContext)
+          
+            console.log(Theme);
   return (
 
-<div className="container-fluid py-5 mt-5">
+<div className={`container-fluid py-5 mt-5 ${Theme.Theme}`}>
   <div className="container py-5">
     <div className="row g-4 mb-5">
       <div className="col-lg-8 col-xl-9">
@@ -56,9 +60,9 @@ export default function ShopDetail(props) {
             </div>
           </div>
           <div className="col-lg-6">
-            <h4 className="fw-bold mb-3">{productDatas?.name}</h4>
+            <h4 className="fw-bold mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{productDatas?.name}</h4>
             <p className="mb-3">Category: Vegetables</p>
-            <h5 className="fw-bold mb-3">{productDatas?.price +' ₹/kg'}</h5>
+            <h5 className="fw-bold mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{productDatas?.price +' ₹/kg'}</h5>
             <div className="d-flex mb-4">
               <i className="fa fa-star text-secondary" />
               <i className="fa fa-star text-secondary" />

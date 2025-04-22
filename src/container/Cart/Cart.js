@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DecrementQut, IncrementQut, RemoveProduct } from '../../redux/Slice/cartSlice';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Cart() {
 
@@ -43,19 +44,23 @@ export default function Cart() {
     dispatch(RemoveProduct({ pid: id }))
   }
 
+   const Theme = useContext(ThemeContext)
+  
+    console.log(Theme);
+
   return (
-    <div className="container-fluid py-5" style={{ marginTop: '60px' }}>
+    <div className={`container-fluid py-5 ${Theme.Theme}`} style={{ marginTop: '60px' }}>
       <div className="container py-5">
         <div className="table-responsive">
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">Products</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Handle</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Products</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Name</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Price</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Quantity</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Total</th>
+                <th scope="col"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Handle</th>
               </tr>
             </thead>
 
@@ -71,10 +76,10 @@ export default function Cart() {
                         </div>
                       </th>
                       <td>
-                        <p className="mb-0 mt-4">{v?.name}</p>
+                        <p className="mb-0 mt-4"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{v?.name}</p>
                       </td>
                       <td>
-                        <p className="mb-0 mt-4">{v?.price + ' ₹'}</p>
+                        <p className="mb-0 mt-4"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{v?.price + ' ₹'}</p>
                       </td>
                       <td>
                         <div className="input-group quantity mt-4" style={{ width: 100 }}>
@@ -86,7 +91,7 @@ export default function Cart() {
                               <i className="fa fa-minus" />
                             </button>
                           </div>
-                          <p>{v?.Qut}</p>
+                          <p  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{v?.Qut}</p>
                           {/* <input type="text" className="form-control form-control-sm text-center border-0" defaultValue={1} /> */}
                           <div className="input-group-btn">
                             <button className="btn btn-sm btn-plus rounded-circle bg-light border"
@@ -100,7 +105,7 @@ export default function Cart() {
                       <td>
                         {
 
-                          <p className="mb-0 mt-4">{v?.price * v?.Qut + ' ₹'} </p>
+                          <p className="mb-0 mt-4"  style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>{v?.price * v?.Qut + ' ₹'} </p>
                         }
 
                       </td>

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getallCatData } from '../../redux/Slice/categorySlice';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Main() {
 
@@ -11,14 +12,18 @@ export default function Main() {
   }, [])
 
   const categoryData = useSelector(state => state.Category);
-        console.log(categoryData);
+  console.log(categoryData);
 
   const productselector = useSelector((state => state.product));
-        console.log(productselector);    
-  
+  console.log(productselector);
+
+  const Theme = useContext(ThemeContext)
+
+  console.log(Theme);
+
 
   return (
-    <div>
+    <div className={`${Theme.Theme}`}>
       {/* Hero Start */}
       <div className="container-fluid py-5 mb-5 hero-header">
         <div className="container py-5">
@@ -68,7 +73,7 @@ export default function Main() {
                 </div>
                 <div className="featurs-content text-center">
                   <h5>Free Shipping</h5>
-                  <p className="mb-0">Free on order over $300</p>
+                  <p className="mb-0" style={{ color: 'black' }}> Free on order over $300</p>
                 </div>
               </div>
             </div>
@@ -79,7 +84,7 @@ export default function Main() {
                 </div>
                 <div className="featurs-content text-center">
                   <h5>Security Payment</h5>
-                  <p className="mb-0">100% security payment</p>
+                  <p className="mb-0" style={{ color: 'black' }}>100% security payment</p>
                 </div>
               </div>
             </div>
@@ -90,7 +95,7 @@ export default function Main() {
                 </div>
                 <div className="featurs-content text-center">
                   <h5>30 Day Return</h5>
-                  <p className="mb-0">30 day money guarantee</p>
+                  <p className="mb-0" style={{ color: 'black' }}>30 day money guarantee</p>
                 </div>
               </div>
             </div>
@@ -101,7 +106,7 @@ export default function Main() {
                 </div>
                 <div className="featurs-content text-center">
                   <h5>24/7 Support</h5>
-                  <p className="mb-0">Support every time fast</p>
+                  <p className="mb-0" style={{ color: 'black' }}>Support every time fast</p>
                 </div>
               </div>
             </div>
@@ -115,7 +120,7 @@ export default function Main() {
           <div className="tab-class text-center">
             <div className="row g-4">
               <div className="col-lg-4 text-start">
-                <h1>Our Organic Products</h1>
+                <h1 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Our Organic Products</h1>
               </div>
               <div className="col-lg-8 text-end">
                 <ul className="nav nav-pills d-inline-flex text-center mb-5">
@@ -159,10 +164,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Grapes</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className=" fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -175,10 +180,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Grapes</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className=" fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -191,10 +196,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Raspberries</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Raspberries</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className=" fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -207,10 +212,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Apricots</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Apricots</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className="fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -223,10 +228,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Banana</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Banana</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className="fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -239,10 +244,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Oranges</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Oranges</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className="fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -255,10 +260,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Raspberries</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Raspberries</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className="fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -271,10 +276,10 @@ export default function Main() {
                           </div>
                           <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                           <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
+                            <h4 style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Grapes</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                             <div className="d-flex justify-content-between flex-lg-wrap">
-                              <p className="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                              <p className="fs-5 fw-bold mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>$4.99 / kg</p>
                               <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                             </div>
                           </div>
@@ -474,16 +479,16 @@ export default function Main() {
               categoryData.Category?.map((v, i) => (
                 <div className="col-md-6 col-lg-4">
                   <NavLink to={"/SubCategory/" + v._id}>
-                  <div className="service-item bg-secondary rounded border border-secondary">
-                  <img src={'http://localhost:8000/'+ v.cat_img} className="img-fluid rounded-top w-100"   alt />
-                  <div className="px-4 rounded-bottom">
-                    <div className="service-content bg-primary text-center p-4 rounded">
-                      <h2 key={v._id} value={v._id}>
-                        {v.name}
-                      </h2>
+                    <div className="service-item bg-secondary rounded border border-secondary">
+                      <img src={'http://localhost:8000/' + v.cat_img} className="img-fluid rounded-top w-100" alt />
+                      <div className="px-4 rounded-bottom">
+                        <div className="service-content bg-primary text-center p-4 rounded">
+                          <h2 key={v._id} value={v._id}>
+                            {v.name}
+                          </h2>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
                   </NavLink>
                 </div>
 
@@ -535,7 +540,7 @@ export default function Main() {
       {/* Vesitable Shop Start*/}
       <div className="container-fluid vesitable py-5">
         <div className="container py-5">
-          <h1 className="mb-0">Fresh Organic Vegetables</h1>
+          <h1 className="mb-0" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Fresh Organic Vegetables</h1>
           <div className="owl-carousel vegetable-carousel justify-content-center">
             <div className="border border-primary rounded position-relative vesitable-item">
               <div className="vesitable-img">
@@ -685,7 +690,7 @@ export default function Main() {
       <div className="container-fluid py-5">
         <div className="container py-5">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: 700 }}>
-            <h1 className="display-4">Bestseller Products</h1>
+            <h1 className="display-4" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Bestseller Products</h1>
             <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
           </div>
           <div className="row g-4">
@@ -698,11 +703,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }} />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }} />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star" style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -719,11 +724,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }} />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star" style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -740,11 +745,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star" style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -761,11 +766,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star" style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -782,11 +787,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star" style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -803,11 +808,11 @@ export default function Main() {
                   <div className="col-6">
                     <a href="#" className="h5">Organic Tomato</a>
                     <div className="d-flex my-3">
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star text-primary" />
-                      <i className="fas fa-star" />
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                      <i className="fas fa-star"  style={{ color: 'black' }}/>
                     </div>
                     <h4 className="mb-3">3.12 $</h4>
                     <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
@@ -819,15 +824,15 @@ export default function Main() {
               <div className="text-center">
                 <img src="img/fruite-item-1.jpg" className="img-fluid rounded" alt />
                 <div className="py-4">
-                  <a href="#" className="h5">Organic Tomato</a>
+                  <a href="#" className="h5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Organic Tomato</a>
                   <div className="d-flex my-3 justify-content-center">
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star" />
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star" style={{ color: 'white' }}/>
                   </div>
-                  <h4 className="mb-3">3.12 $</h4>
+                  <h4 className="mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>3.12 $</h4>
                   <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                 </div>
               </div>
@@ -836,15 +841,15 @@ export default function Main() {
               <div className="text-center">
                 <img src="img/fruite-item-2.jpg" className="img-fluid rounded" alt />
                 <div className="py-4">
-                  <a href="#" className="h5">Organic Tomato</a>
+                  <a href="#" className="h5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Organic Tomato</a>
                   <div className="d-flex my-3 justify-content-center">
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star" />
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star" style={{ color: 'white' }}/>
                   </div>
-                  <h4 className="mb-3">3.12 $</h4>
+                  <h4 className="mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>3.12 $</h4>
                   <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                 </div>
               </div>
@@ -853,15 +858,15 @@ export default function Main() {
               <div className="text-center">
                 <img src="img/fruite-item-3.jpg" className="img-fluid rounded" alt />
                 <div className="py-4">
-                  <a href="#" className="h5">Organic Tomato</a>
+                  <a href="#" className="h5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Organic Tomato</a>
                   <div className="d-flex my-3 justify-content-center">
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star" />
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star" style={{ color: 'white' }}/>
                   </div>
-                  <h4 className="mb-3">3.12 $</h4>
+                  <h4 className="mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>3.12 $</h4>
                   <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                 </div>
               </div>
@@ -869,16 +874,16 @@ export default function Main() {
             <div className="col-md-6 col-lg-6 col-xl-3">
               <div className="text-center">
                 <img src="img/fruite-item-4.jpg" className="img-fluid rounded" alt />
-                <div className="py-2">
-                  <a href="#" className="h5">Organic Tomato</a>
+                <div className="py-4">
+                  <a href="#" className="h5" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Organic Tomato</a>
                   <div className="d-flex my-3 justify-content-center">
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star text-primary" />
-                    <i className="fas fa-star" />
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star text-primary" style={{ color: 'black' }}/>
+                    <i className="fas fa-star" style={{ color: 'white' }}/>
                   </div>
-                  <h4 className="mb-3">3.12 $</h4>
+                  <h4 className="mb-3" style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>3.12 $</h4>
                   <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                 </div>
               </div>
@@ -890,7 +895,7 @@ export default function Main() {
       {/* Fact Start */}
       <div className="container-fluid py-5">
         <div className="container">
-          <div className="bg-light p-5 rounded">
+          <div className="p-5 rounded">
             <div className="row g-4 justify-content-center">
               <div className="col-md-6 col-lg-6 col-xl-3">
                 <div className="counter bg-white rounded p-5">
@@ -930,7 +935,7 @@ export default function Main() {
         <div className="container py-5">
           <div className="testimonial-header text-center">
             <h4 className="text-primary">Our Testimonial</h4>
-            <h1 className="display-5 mb-5 text-dark">Our Client Saying!</h1>
+            <h1 className="display-5 mb-5 " style={{ color: Theme.Theme === 'light' ? 'black' : 'white' }}>Our Client Saying!</h1>
           </div>
           <div className="owl-carousel testimonial-carousel">
             <div className="testimonial-item img-border-radius bg-light rounded p-4">

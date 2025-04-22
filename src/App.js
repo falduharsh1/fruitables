@@ -9,6 +9,7 @@ import { createStore } from "./redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
 import Alert from "./component/Alert/Alert";
 import { SnackbarProvider } from "notistack";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
 
@@ -16,28 +17,30 @@ function App() {
 
   return (
     <>
-    <SnackbarProvider>
-    <Provider store = {store} >
-    <PersistGate loading={null} persistor={persistor}>
-    <Alert/>
-    <Routes>
-        <Route path="/*" element={<UserRoute/>} />
-        <Route element={<PrivateRoute/>}>
-        <Route path="/Admin/*" element={<AdminRoute/>}/>
-      </Route>
-    </Routes>
-    </PersistGate>
-    </Provider>
-    </SnackbarProvider>
-     {/* <Main/> */}
-     {/* <Shop /> */}
-     {/* <ShopDetail/> */}
-     {/* <Testimonial/> */}
-     {/* <Cart/> */}
-     {/* <Chackout/> */}
-     {/* <Contact/> */}
-     {/* <Error404/> */}
-    
+      <SnackbarProvider>
+        <ThemeProvider>
+          <Provider store={store} >
+            <PersistGate loading={null} persistor={persistor}>
+              <Alert />
+              <Routes>
+                <Route path="/*" element={<UserRoute />} />
+                <Route element={<PrivateRoute />}>
+                  <Route path="/Admin/*" element={<AdminRoute />} />
+                </Route>
+              </Routes>
+            </PersistGate>
+          </Provider>
+        </ThemeProvider>
+      </SnackbarProvider>
+      {/* <Main/> */}
+      {/* <Shop /> */}
+      {/* <ShopDetail/> */}
+      {/* <Testimonial/> */}
+      {/* <Cart/> */}
+      {/* <Chackout/> */}
+      {/* <Contact/> */}
+      {/* <Error404/> */}
+
     </>
   );
 }

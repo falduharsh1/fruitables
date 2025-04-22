@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
@@ -9,6 +9,7 @@ import { object, string } from "yup";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function Contact() {
   const [setcat, setcatdata] = useState([]);
@@ -153,15 +154,19 @@ export default function Contact() {
   const { handleChange, handleSubmit, handleBlur, errors, values, touched, resetForm , setValues } =
     formik;
 
+    const Theme = useContext(ThemeContext)
+          
+            console.log(Theme);
+
   return (
-    <div className="container-fluid contact py-5">
+    <div className={`container-fluid contact py-5  ${Theme.Theme}`}>
       <div className="container py-5">
         <div className="p-5 bg-light rounded">
           <div className="row g-4">
             <div className="col-12">
               <div className="text-center mx-auto" style={{ maxWidth: 700 }}>
                 <h1 className="text-primary">Get in touch</h1>
-                <p className="mb-4">
+                <p className="mb-4" style={{ color: 'black' }}>
                   The contact form is currently inactive. Get a functional and
                   working contact form with Ajax &amp; PHP in a few minutes.
                   Just copy and paste the files, add a little code and you're
