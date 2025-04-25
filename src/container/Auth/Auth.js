@@ -96,12 +96,12 @@ export default function Auth() {
                 }
 
             }
-            // else if (type === 'password') {
-            //     const res = await dispatch(forgotPassword({email : values.email}))
-            //     console.log(res);
-            //     console.log("userEmail",userEmail);
+            else if (type === 'password') {
+                const res = await dispatch(forgotPassword({email : values.email}))
+                console.log(res);
+                console.log("userEmail",userEmail);
                 
-            // }
+            }
 
             resetForm()
 

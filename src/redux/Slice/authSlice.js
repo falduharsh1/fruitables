@@ -122,28 +122,28 @@ export const checkOTP = createAsyncThunk(
     }
 )
 
-// export const forgotPassword = createAsyncThunk(
-//     'auth/forgotPassword',
-//     async (__ , { dispatch, rejectWithValue }) => {
+export const forgotPassword = createAsyncThunk(
+    'auth/forgotPassword',
+    async (data , { dispatch, rejectWithValue }) => {
 
-//         try {
+        try {
 
-//             const response = await axiosInstance.post('user/forgot-password')
+            const response = await axiosInstance.post('user/forgot-password',data)
 
-//             console.log(response.data);
+            console.log(response.data);
 
-//             if (response.data.success) {
-//                 dispatch(setAlert({ variant: "success", message: response.data.message }))
-//             }
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+            }
 
-//         } catch (error) {
+        } catch (error) {
 
-//             dispatch(setAlert({ variant: "error", message: error.response.data.message }))
-//             return rejectWithValue(error)
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
 
-//         }
-//     }
-// )
+        }
+    }
+)
 
 const authSlice = createSlice({
     name: 'auth',
@@ -179,18 +179,18 @@ const authSlice = createSlice({
             state.error = null;
             state.isValidate = true;
         })
-        // builder.addCase(forgotPassword.fulfilled, (state, action) => {
-        //     state.isLoading = false;
-        //     state.user = action.payload;
-        //     state.error = null;
-        //     state.isValidate = true;
-        // })
-        // builder.addCase(forgotPassword.rejected, (state, action) => {
-        //     state.isLoading = false;
-        //     state.user = null;
-        //     state.error = null;
-        //     state.isValidate = false;
-        // })
+        builder.addCase(forgotPassword.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload;
+            state.error = null;
+            state.isValidate = true;
+        })
+        builder.addCase(forgotPassword.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.error = null;
+            state.isValidate = false;
+        })
     }
 })
 
