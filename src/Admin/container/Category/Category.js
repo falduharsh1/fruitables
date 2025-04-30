@@ -94,7 +94,7 @@ export default function Category() {
           height: 50,
           width: 65,
         }}
-        src={'http://localhost:8000/'+ params.value}
+        src={params.value}
       />,
     },
     {
@@ -225,6 +225,8 @@ export default function Category() {
 
   const { handleChange, handleSubmit, handleBlur, errors, values, touched, resetForm, setValues ,setFieldValue } = formik
 
+  {console.log(CatgorySelector?.Category)}
+
   return (
     <>
       <div>Category</div>
@@ -303,6 +305,9 @@ export default function Category() {
           checkboxSelection
           sx={{ border: 0 }}
         />
+
+       
+        
       </Paper>
     </React.Fragment>
     </>
