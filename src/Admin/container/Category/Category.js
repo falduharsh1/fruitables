@@ -296,7 +296,7 @@ export default function Category() {
         </form>
       </Dialog>
       <Paper sx={{ height: 400, width: '100%' }}>
-        {/* <DataGrid
+        <DataGrid
           rows={CatgorySelector?.Category}
           getRowId={(row) => row._id} 
           columns={columns}
@@ -304,7 +304,7 @@ export default function Category() {
           pageSizeOptions={[5, 10]}
           checkboxSelection
           sx={{ border: 0 }}
-        /> */}
+        />
 
        
         
