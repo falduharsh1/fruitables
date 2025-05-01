@@ -94,7 +94,7 @@ export default function Category() {
           height: 50,
           width: 65,
         }}
-        src={params.value}
+        src={params.value.url}
       />,
     },
     {
