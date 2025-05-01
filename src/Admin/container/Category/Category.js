@@ -282,7 +282,7 @@ export default function Category() {
               onBlur={handleBlur}
             />
 
-            <img src={typeof values?.cat_img === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
+            <img src={typeof values?.cat_img?.url === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
 
             {errors.cat_img && touched.cat_img ? <span style={{ color: "red" }}> {errors.cat_img} </span> : ''}
 
