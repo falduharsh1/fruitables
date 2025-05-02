@@ -125,7 +125,7 @@ export default function Category() {
       .required(),
     description: string().required(),
     cat_img: mixed()
-      .required("You need to provide a file")
+      // .required("You need to provide a file")
       .test("cat_img", "The file is too large", (value) => {
 
         if (typeof value === 'string') {
