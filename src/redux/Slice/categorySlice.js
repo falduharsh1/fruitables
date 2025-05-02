@@ -27,7 +27,7 @@ export const CategoryDataget = createAsyncThunk(
     'Category/CategoryDataget',
     async (data,{dispatch}) => {
         try {
-            console.log(data);
+            console.log(data);  // {id: '', name: '', des: '', cat_img: ''}
             
             const response = await axiosInstance.post("/category/post-category", data ,{
                 headers: {
@@ -72,7 +72,9 @@ export const editCategory = createAsyncThunk(
     'Category/editCategory',
     async (data,{dispatch}) => {
         try {
-            const response = await axiosInstance.put("category/put-category/" + data._id , data , {
+            console.log("ffff", data);
+            
+            const response = await axiosInstance.put("category/put-category/" + data._id , {name:data.name, description : data.description, cat_img : data.cat_img} , {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }
@@ -87,6 +89,7 @@ export const editCategory = createAsyncThunk(
                 return response.data.data
 
             }
+
             return response.data.data
         } catch (error) {
             console.log(error);

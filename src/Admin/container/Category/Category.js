@@ -211,11 +211,14 @@ export default function Category() {
     },
     validationSchema: CategorySchema,
     onSubmit: (values, { resetForm }) => {
+      console.log("values.name, values.description, values.cat_img",values.name, values.description, values.cat_img);
 
       if (update) {
-        updateData(values)
+        // updateData(values.name,values.description,values.cat_img)
+        updateData({_id : values._id , name:values.name, description : values.description, cat_img : values.cat_img})
+        
       } else {
-        localDataset(values)
+        localDataset({_id : values._id , name:values.name, description : values.description, cat_img : values.cat_img})
       }
 
       resetForm();
