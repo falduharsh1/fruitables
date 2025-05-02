@@ -125,10 +125,11 @@ export default function Category() {
       .required(),
     description: string().required(),
     cat_img: mixed()
-      // .required("You need to provide a file")
+      .required("You need to provide a file")
       .test("cat_img", "The file is too large", (value) => {
-
-        if (typeof value === 'string') {
+        console.log("valueImg",value);
+        
+        if (typeof value === 'string' || typeof value.url === 'string') {
           return true
         } else if (typeof value === 'object') {
           return value && value.size <= 2000000;
@@ -137,7 +138,7 @@ export default function Category() {
       })
       .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
 
-        if (typeof value === 'string') {
+        if (typeof value === 'string'|| typeof value.url === 'string') {
           return true
         } else if (typeof value === 'object') {
           return value && (
@@ -285,7 +286,9 @@ export default function Category() {
               onBlur={handleBlur}
             />
 
-            <img src={typeof values?.cat_img?.url === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
+            {/* <img src={typeof values?.cat_img?.url === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} /> */}
+            {/* <img src={typeof values?.cat_img?.url === 'string' ? 'http://localhost:8000/' + values?.cat_img : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} /> */}
+            <img src={typeof values?.cat_img?.url === 'string' ? values?.cat_img?.url : "../img/"  + values?.cat_img.name} width={'100px'} height={'100px'} />
 
             {errors.cat_img && touched.cat_img ? <span style={{ color: "red" }}> {errors.cat_img} </span> : ''}
 
