@@ -58,7 +58,7 @@ export default function SubCategory() {
           height: 50,
           width: 65,
         }}
-        src={'http://localhost:8000/' + params.value}
+        src={params.value.url}
       />,
      
       
@@ -119,8 +119,9 @@ export default function SubCategory() {
     subCat_img: mixed()
       .required("You need to provide a file")
       .test("subCat_img", "The file is too large", (value) => {
-
-        if (typeof value === 'string') {
+        console.log("valueImg",value);
+        
+        if (typeof value === 'string' || typeof value.url === 'string' ) {
           return true
         } else if (typeof value === 'object') {
           return value && value.size <= 2000000;
@@ -129,7 +130,7 @@ export default function SubCategory() {
       })
       .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
 
-        if (typeof value === 'string') {
+        if (typeof value === 'string' || typeof value.url === 'string') {
           return true
         } else if (typeof value === 'object') {
           return value && (
@@ -157,9 +158,9 @@ export default function SubCategory() {
       // alert(JSON.stringify(values, null, 2));
 
       if (update) {
-        dispatch(editSubCat(values))
+        dispatch(editSubCat({_id : values._id , category : values.category , name:values.name, description : values.description, subCat_img : values.subCat_img}))
       } else {
-        handleCatData({ ...values, id: Math.floor(Math.random() * 1000) })
+        handleCatData({ category : values.category , name:values.name, description : values.description, subCat_img : values.subCat_img })
       }
 
       resetForm()
@@ -255,7 +256,8 @@ export default function SubCategory() {
                 onBlur={handleBlur}
               />
 
-              <img src={typeof values?.subCat_img === 'string' ? 'http://localhost:8000/' + values?.subCat_img : "../img/" + values?.subCat_img.name} width={'100px'} height={'100px'} />
+              {/* <img src={typeof values?.subCat_img === 'string' ? 'http://localhost:8000/' + values?.subCat_img : "../img/" + values?.subCat_img.name} width={'100px'} height={'100px'} /> */}
+              <img src={typeof values?.subCat_img.url === 'string' ? values?.subCat_img.url : "../img/" + values?.subCat_img.name} width={'100px'} height={'100px'} />
 
               {errors.subCat_img && touched.subCat_img ? <span style={{ color: "red" }}> {errors.subCat_img} </span> : ''}
 
