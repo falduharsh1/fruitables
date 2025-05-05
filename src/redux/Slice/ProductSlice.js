@@ -66,7 +66,7 @@ export const editproduct = createAsyncThunk(
     'product/editproduct',
     async (data) => {
         try {
-            const response = await axiosInstance.put("product/put-product/" + data._id, data,{
+            const response = await axiosInstance.put("product/put-product/" + data._id, {category : data.category , subcategory : data.subcategory , name:data.name, description : data.description, price : data.price ,product_img : data.product_img},{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                   }

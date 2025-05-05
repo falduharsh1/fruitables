@@ -74,6 +74,8 @@ export default function Product() {
                 
                 const categoryName = categoryData?.Category?.find((v) => v._id ===  params.row?.category)
 
+                console.log("categoryName",categoryName);
+                
                 return categoryName?.name
             }
         },
@@ -98,7 +100,7 @@ export default function Product() {
                     height: 50,
                     width: 65,
                 }}
-                src={'http://localhost:8000/' + params.value}
+                src={params.value.url}
             />,
 
 
@@ -133,7 +135,7 @@ export default function Product() {
             .required("You need to provide a file")
             .test("product_img", "The file is too large", (value) => {
 
-                if (typeof value === 'string') {
+                if (typeof value === 'string' || typeof value.url === 'string') {
                     return true
                 } else if (typeof value === 'object') {
                     return value && value.size <= 2000000;
@@ -142,7 +144,7 @@ export default function Product() {
             })
             .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
 
-                if (typeof value === 'string') {
+                if (typeof value === 'string' || typeof value.url === 'string') {
                     return true
                 } else if (typeof value === 'object') {
                     return value && (
@@ -170,9 +172,9 @@ export default function Product() {
             // alert(JSON.stringify(values, null, 2));
 
              if (update) {
-                    dispatch(editproduct(values))
+                    dispatch(editproduct({_id : values._id , category : values.category ,subcategory : values.subcategory ,name:values.name, description : values.description,  price : values.price ,product_img : values.product_img  }))
                   } else {
-                    handleData({ ...values, id: Math.floor(Math.random() * 1000) })
+                    handleData({category : values.category ,subcategory : values.subcategory ,name:values.name, description : values.description,  price : values.price ,product_img : values.product_img  })
                   }
             
                   resetForm()
@@ -188,6 +190,7 @@ export default function Product() {
     const { handleSubmit, handleBlur, handleChange, errors, setValues, values, touched, resetForm, setFieldValue } = formik
 
     const DataGet = async () => {
+        dispatch(getallCatData())
         dispatch(getsubcat())
         dispatch(getSubByCat())
         dispatch(getproduct())
@@ -342,7 +345,8 @@ export default function Product() {
                                 onBlur={handleBlur}
                             />
 
-                            <img src={typeof values?.product_img === 'string' ? 'http://localhost:8000/' + values?.product_img : "../img/" + values?.product_img.name} width={'100px'} height={'100px'} />
+                            {/* <img src={typeof values?.product_img === 'string' ? 'http://localhost:8000/' + values?.product_img : "../img/" + values?.product_img.name} width={'100px'} height={'100px'} /> */}
+                            <img src={typeof values?.product_img.url === 'string' ? values?.product_img.url : "../img/" + values?.product_img.name} width={'100px'} height={'100px'} />
 
                             {errors.product_img && touched.product_img ? <span style={{ color: "red" }}> {errors.product_img} </span> : ''}
 

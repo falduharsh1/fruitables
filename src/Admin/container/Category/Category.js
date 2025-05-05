@@ -236,7 +236,7 @@ export default function Category() {
       <div>Category</div>
       <br></br>
     <React.Fragment>
-      <Button style={{ marginLeft: '89%' }} variant="outlined" onClick={handleClickOpen} >
+      <Button variant="outlined" onClick={handleClickOpen} >
         Add Category
       </Button>
       <br></br>
