@@ -142,18 +142,18 @@ export default function Product() {
                 }
 
             })
-            .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
+            // .test("type", "Only the following formats are accepted: .jpeg, .png", (value) => {
 
-                if (typeof value === 'string' || typeof value.url === 'string') {
-                    return true
-                } else if (typeof value === 'object') {
-                    return value && (
-                        value.type === "image/jpeg" ||
-                        value.type === "image/png"
-                    )
-                }
+            //     if (typeof value === 'string' || typeof value.url === 'string') {
+            //         return true
+            //     } else if (typeof value === 'object') {
+            //         return value && (
+            //             value.type === "image/jpeg" ||
+            //             value.type === "image/png"
+            //         )
+            //     }
 
-            }),
+            // }),
     });
 
     console.log(productselector?.product);

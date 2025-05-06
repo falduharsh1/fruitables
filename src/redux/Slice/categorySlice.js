@@ -25,7 +25,7 @@ export const getallCatData = createAsyncThunk(
 
 export const CategoryDataget = createAsyncThunk(
     'Category/CategoryDataget',
-    async (data,{dispatch}) => {
+    async (data,{dispatch ,rejectWithValue}) => {
         try {
             console.log(data);  // {id: '', name: '', des: '', cat_img: ''}
             
@@ -44,6 +44,9 @@ export const CategoryDataget = createAsyncThunk(
 
         } catch (error) {
             console.log(error);
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
             
         }
     }
@@ -103,6 +106,16 @@ const categorySlice = createSlice({
     extraReducers : (builder) => {
         builder.addCase(CategoryDataget.fulfilled, (state,action) => {
             state.Category = state.Category.concat(action.payload)
+            state.isLoading = false;
+            state.user = action.payload;
+            state.error = null;
+            state.isValidate = true;
+        })
+        builder.addCase(CategoryDataget.rejected, (state, action) => {
+                    state.isLoading = false;
+                    state.user = null;
+                    state.error = action.payload;
+                    state.isValidate = false;
         })
         builder.addCase(getallCatData.fulfilled, (state,action) => {
             state.Category = action.payload

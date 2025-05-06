@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { setAlert } from "./errorSlice";
 
 const initialState = {
     isLoading: false,
     product: [],
-    subcategory : [],
+    subcategory: [],
     error: null
 }
 export const getproduct = createAsyncThunk(
@@ -26,21 +27,30 @@ export const getproduct = createAsyncThunk(
 
 export const addproduct = createAsyncThunk(
     'product/addproduct',
-    async (data) => {
+    async (data, { dispatch, rejectWithValue }) => {
         try {
             console.log("helllo");
-            
-            const response = await axiosInstance.post("product/post-product", data,{
+
+            const response = await axiosInstance.post("product/post-product", data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                  }
+                }
             });
 
             console.log(response);
 
-            return response.data.data   
+            if (response.data.success) {
+                dispatch(setAlert({ variant: "success", message: response.data.message }))
+                return response.data.data
+            }
+
+            return response.data.data
+
         } catch (error) {
             console.log(error);
+
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            return rejectWithValue(error)
         }
     }
 )
@@ -50,11 +60,11 @@ export const deleteproduct = createAsyncThunk(
     async (id) => {
         try {
             console.log(id);
-            
+
             const response = await axiosInstance.delete("product/delete-product/" + id)
 
             return response.data.data._id
-            
+
         } catch (error) {
             console.log(error);
 
@@ -66,10 +76,10 @@ export const editproduct = createAsyncThunk(
     'product/editproduct',
     async (data) => {
         try {
-            const response = await axiosInstance.put("product/put-product/" + data._id, {category : data.category , subcategory : data.subcategory , name:data.name, description : data.description, price : data.price ,product_img : data.product_img},{
+            const response = await axiosInstance.put("product/put-product/" + data._id, { category: data.category, subcategory: data.subcategory, name: data.name, description: data.description, price: data.price, product_img: data.product_img }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                  }
+                }
             })
 
             return response.data.data
@@ -85,11 +95,11 @@ export const getSubByCat = createAsyncThunk(
     async (category_id) => {
         try {
             console.log(category_id);
-            
+
             const response = await axiosInstance.get("product/getSubByCat/" + category_id)
 
             console.log("SubCategoryget", response.data.data);
-            
+
 
             return response.data.data
         } catch (error) {
@@ -106,11 +116,21 @@ const productSlice = createSlice({
             console.log(action.payload)
             state.product = action.payload
         })
-        builder.addCase(getSubByCat.fulfilled ,(state, action) => {
+        builder.addCase(getSubByCat.fulfilled, (state, action) => {
             state.subcategory = action.payload
         })
         builder.addCase(addproduct.fulfilled, (state, action) => {
             state.product = state.product?.concat(action.payload)
+            state.isLoading = false;
+            state.user = action.payload;
+            state.error = null;
+            state.isValidate = true;
+        })
+        builder.addCase(addproduct.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.error = action.payload;
+            state.isValidate = false;
         })
         builder.addCase(deleteproduct.fulfilled, (state, action) => {
             state.product = state.product.filter((v) => v._id !== action.payload)

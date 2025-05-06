@@ -29,7 +29,7 @@ export const userRegister = createAsyncThunk(
         } catch (error) {
 
             console.log(error);
-            // dispatch(setAlert({ variant: "error", message: error.response.data.message }))
+            dispatch(setAlert({ variant: "error", message: error.response.data.message }))
 
         }
 

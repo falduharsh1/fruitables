@@ -480,7 +480,8 @@ export default function Main() {
                 <div className="col-md-6 col-lg-4">
                   <NavLink to={"/SubCategory/" + v._id}>
                     <div className="service-item bg-secondary rounded border border-secondary">
-                      <img src={'http://localhost:8000/' + v.cat_img} className="img-fluid rounded-top w-100" alt />
+                      {/* <img src={'http://localhost:8000/' + v.cat_img} className="img-fluid rounded-top w-100" alt /> */}
+                      <img src={ v.cat_img.url} className="img-fluid rounded-top w-100" alt />
                       <div className="px-4 rounded-bottom">
                         <div className="service-content bg-primary text-center p-4 rounded">
                           <h2 key={v._id} value={v._id}>
